@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-hello.txt
-=======
-hello world
-It's a new day for git
->>>>>>> f630b900cc9c080c5edfc86e7f764eee644d6961
