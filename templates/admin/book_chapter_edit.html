@@ -1,0 +1,20 @@
+{% extends "admin/admin_site.html" %}
+{% load filters %}
+{% block title %}图书章节管理{% endblock %}
+{% block sub_menu %}{% include "admin/book_chapter_sub_menu.html" %}{% endblock %}
+{% block content %}
+<form name="book_chapter_form" method="post" action="">
+<p class="message">{{ messages|first}}</p>
+<table>
+    <tr><td class="left_title">编号</td><td>
+        <input type="text" name="id_show" class="text_box" disabled="true"  value="{{ book_chapter.id }}" />
+        <input name="id" type="hidden" value="{{ book_chapter.id }}" />
+        <input type="hidden" name="book_id" value="{{ book_id }}" />
+    </td></tr>
+    <tr><td class="left_title">标题</td><td><input type="text" name="title"  class="text_box" value="{{ book_chapter.title }}"/></td></tr>
+    <tr><td class="left_title">内容</td><td><textarea rows="10" cols="120" name="content"  class="text_box">{{ book_chapter.content }}</textarea></td></tr>
+    <tr><td></td><td><input type="submit" value="Submit" ></td></tr>
+</table>
+
+</form>
+{% endblock %}

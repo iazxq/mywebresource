@@ -1,0 +1,53 @@
+{% extends "admin/admin_site.html" %}
+{% load filters %}
+{%load pager_tag%}
+{% block title %}文章管理{% endblock %}
+{% block sub_menu %}{% include "admin/article_sub_menu.html" %}{% endblock %}
+{% block content %}
+<script language="javascript" type="text/javascript">
+function del(id,title){
+    if (confirm("确定删除《" + title +"》?"))
+        location.href="article_del?id=" + id;
+}
+</script>
+<table>
+<tr><td colspan="6">
+    <form method="get">
+    <select name="category">
+        {% for category in category_list %}
+            <option value="{{ category.category_id }}" {% ifequal category.category_id category_id %}selected{% endifequal %}>{{ category.category_name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="搜索">
+    </form>
+</td></tr>
+    <tr class="head">
+        <td width="50">编号</td>
+        <td>标题</td>
+        <td width="50">点击</td>
+        <td width="50">下载</td>
+        <td width="50">推荐</td>
+        <td width="50">状态</td>
+        <td width="70">操作</td>
+    </tr>
+    {% for article in article_list %}
+    <tr class="{% cycle row1,row2 %}">
+        <td>{{ article.id }}</td>
+        <td><a href="article_edit?id={{ article.id }}">{{ article.title }}</a></td>
+        <td>{{ article.hits }} </td>
+        <td>{{ article.download }}</td>
+        <td><a href="article_update_recommend?id={{ article.id }}">{% ifequal article.recommend 1%}<span class="red">是</span>{% else %}否{% endifequal %}</a></td>
+        <td><a href="article_update_state?id={{ article.id }}">{{ article.state|get_state|safe }}</a></td>
+        <td><a href="article_edit?id={{ article.id }}">改</a> | <a href="javascript:void(0)" onclick="del('{{ article.id }}','{{ article.title }}')">删</a></td>
+    </tr>
+    {%endfor  %}
+</table>
+
+<table>
+<tr>
+    <td style="text-align: right">总点击量：{{ total_hits }},总下载量：{{ total_download }}</td>
+</tr>
+</table>
+
+    {%pager_tag pager%}
+{% endblock %}

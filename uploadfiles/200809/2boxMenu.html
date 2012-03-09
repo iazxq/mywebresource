@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+</head>
+<body>
+<form name="doublecombo">
+<p>
+<select name="example" size="1" onChange="redirect(this.options.selectedIndex)">
+<option>国外JavaScript技术网站</option>
+<option>国内JavaScript技术网站</option>
+<option>国外的著名搜索引擎</option>
+</select>
+<select name="stage2" size="1">
+<option value="http://wsabstract.com">Website Abstraction</option>
+<option value="http://www.dynamicdrive.com">Dynamicdrive.com</option>
+<option value="http://javascript.internet.com">JavaScript</option>
+</select>
+<input type="button" name="test" value="Go!"
+onClick="go()">
+</p>
+<script>
+<!--
+var groups=document.doublecombo.example.options.length
+  var group=new Array(groups)
+  for (i=0; i<groups; i++)
+  group[i]=new Array()
+group[0][0]=new Option("Share JavaScript","http://www.sharejs.com")
+  group[0][1]=new Option("Dynamicdrive.com","http://www.dynamicdrive.com")
+  group[0][2]=new Option("JavaScript","http://javascript.internet.com")
+group[1][0]=new Option("分享JavaScript","http://www.sharejs.com")
+  group[1][1]=new Option("JavaScript2000","http://www.javascript2000.com")
+  group[1][2]=new Option("无忧脚本","http://www.51js.com")
+group[2][0]=new Option("Hotbot","http://www.hotbot.com")
+  group[2][1]=new Option("Infoseek","http://www.infoseek.com")
+  group[2][2]=new Option("Excite","http://www.excite.com")
+  group[2][3]=new Option("Lycos","http://www.lycos.com")
+var temp=document.doublecombo.stage2
+function redirect(x){
+  for (m=temp.options.length-1;m>0;m--)
+  temp.options[m]=null
+  for (i=0;i<group[x].length;i++){
+  temp.options[i]=new Option(group[x][i].text,group[x][i].value)
+  }
+  temp.options[0].selected=true
+  }
+function go(){
+  location=temp.options[temp.selectedIndex].value
+  }
+  //-->
+  </script>
+  </form>
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

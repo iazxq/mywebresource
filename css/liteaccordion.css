@@ -1,0 +1,28 @@
+@charset 'utf-8';
+/*************************************************
+*
+*	project:  	liteAccordion - horizontal accordion plugin for jQuery
+*	author:   	Nicola Hibbert
+*	url:	  	http://nicolahibbert.com/horizontal-accordion-jquery-plugin
+*	demo:	  	http://www.nicolahibbert.com/demo/liteAccordion
+*
+/*************************************************/
+/****************************************** Core */
+.accordion { text-align: left; margin-bottom: 44px; }
+.accordion ul { position: relative; overflow: hidden; height: 100%; margin: 0; padding: 0; list-style-type: none; }
+.accordion li > h2 { border: none; font-size: 17px; width: 320px; font-weight: normal; line-height: 29px; margin: 0; padding-bottom: 0; z-index: 2; position: absolute; top: 0; left: 0; -webkit-transform: translateX(-100%) rotate(-90deg); -webkit-transform-origin: right top; -moz-transform: translateX(-100%) rotate(-90deg); -moz-transform-origin: right top; 
+	-o-transform: translateX(-100%) rotate(-90deg); -o-transform-origin: right top; -ms-transform: translateX(-100%) rotate(-90deg); -ms-transform-origin: right top; transform: translateX(-100%) rotate(-90deg); transform-origin: right top; filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); }
+.accordion li > h2 span { display: block; padding-right: 7%; text-align: right; height: 100%; padding-top: 8px; height: 40px;}
+.accordion li > h2 b { display: inline-block; position: absolute; top: 10%; top: 42%\9; left: 10%; left: 5%\9; text-align: center; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -o-transform: rotate(90deg); transform: rotate(90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1); }
+.accordion li:first-child div img {margin-left: 8px;}
+.accordion li > h2:hover { cursor: pointer; }
+.accordion li > div { height: 100%; position: absolute; top: 0; z-index: 1; overflow: hidden; margin-left: 8px;  }
+.accordion li:first-child > div {margin-left: 0;}
+.accordion li div a { display: block; width: 640px; position: relative; text-decoration: none;}
+.accordion li div span {position:absolute; bottom: 0; left: 0; width: 90%; padding: 10px 75px 20px 16px;}
+.accordion noscript p { padding: 10px; margin: 0; background: white; }
+
+
+
+
+

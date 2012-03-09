@@ -1,0 +1,113 @@
+{% extends "default/site.html" %}
+{% load filters%}
+{% load recommend_article_pic_list_tag %}
+{% load last_article_list_tag %}
+
+{% block title %}{% endblock %}
+{% block keywords %}js,javascript,脚本,jQuery,网页特效,模板,网页设计模板,网站模板,css,HTML5,jQuery插件,网页动画,矢量图,图标下载,模板下载{% endblock %}
+{% block description %}分享集市 sharejs.com是一个以网站设计相关的资源分享网站，网站只提供最优秀的JS代码，jQuery插件,网页特效,HTML5代码，矢量图,设计图标，网站模板等，而且这一切都是免费的。{% endblock %}
+{% block port-carousel %}{% recommend_article_pic_list_tag recommend_article_pic_list %}{% endblock %}
+{% block main-content %}
+    <div id="main-content">
+        <div class="three-col">
+            <h2>Javascript脚本</h2>
+            <ul class="arrow-list">
+                {% for article in javascript_article_list %}
+                <li><span></span><a href="{% url detail article.id %}" target="_blank">{{article.title|left_str:36 }}</a></li>
+                {% endfor %}
+                <a class="btn" href="{% url code %}">获取更多JavaScript脚本<span></span></a>
+            </ul>
+        </div>
+        <div class="three-col end-col">
+            <h2>网页模板</h2>
+            <ul class="arrow-list">
+                {% for article in template_article_list %}
+                    <li><span></span><a href="{% url detail article.id %}" target="_blank">{{ article.title|left_str:36 }}</a></li>
+                {% endfor %}
+                <a class="btn" href="{% url template %}">获取更多网页模板<span></span></a>
+            </ul>
+        </div>
+
+        <div class="one-col">
+            <h2><a href="{% url template %}">精品模板推荐</a></h2>
+            <ul class="thumb-list">
+                {% for article in recommend_template_article_list %}
+                    <li><a  {% cycle '' '' '' 'class="end-col"' %} href="{% url detail article.id %}"  target="_blank"><img class="img-box" alt="{{ article.title }}" src="{{ article.small_pic }}" style="width:150px;height:108px;"/>
+                    <span>{{ article.title|left_str:22 }}</span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+
+        <div class="three-col">
+            <h2>PNG图标</h2>
+            <ul class="arrow-list">
+                {% for article in png_article_list %}
+                    <li><span></span><a href="{% url detail article.id %}" target="_blank">{{ article.title|left_str:32 }}"</a></li>
+                {% endfor %}
+                <a class="btn" href="{% url png %}">获取更多PNG图标<span></span></a>
+            </ul>
+        </div>
+        <div class="three-col end-col">
+            <h2>矢量图素材</h2>
+            <ul class="arrow-list">
+                {% for article in vector_article_list %}
+                    <li><span></span><a href="{% url detail article.id %}" target="_blank">{{ article.title|left_str:32 }}</a></li>
+                {% endfor %}
+                <a class="btn" href="{% url vector %}">获取更多矢量素材<span></span></a>
+            </ul>
+        </div>
+
+        <div class="one-col">
+            <h2><a href="{% url vector %}">精品矢量素材推荐</a></h2>
+            <ul class="thumb-list">
+                {% for article in recommend_vector_article_list %}
+                    <li><a  {% cycle '' '' '' 'class="end-col"' %} href="{% url detail article.id %}"  target="_blank"><img class="img-box" alt="{{ article.title }}" src="{{ article.small_pic }}" style="width:150px;height:108px;"/>
+                        <span>{{ article.title|left_str:22 }}</span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <div id="sidebar">
+        {% last_article_list_tag %}
+        <div class="widget">
+            <h3>专题推荐</h3>
+            <ul  class="bullet-list">
+                {% for topic in topic_list %}
+                    <li><a href="{% url topic topic.topic_id %}"  target="_blank">{{ topic.title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="widget">
+            <ul id="social-nav" class="sub-ruler">
+                <li><a href="#t1-sidebar">Hot脚本</a></li>
+                <li><a href="#t2-sidebar">Hot网页模板</a></li>
+            </ul>
+            <div id="t1-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in hot_javascript_article_list %}
+                    <li><a href="{% url detail article.id %}"  target="_blank">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <a class="btn" href="{% url code %}">获取更多脚本<span></span></a>
+            </div>
+            <div id="t2-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in hot_template_article_list %}
+                        <li><a href="{% url detail article.id %}"  target="_blank">{{ article.title }}</a></li>
+                    {% endfor %}
+                    <a class="btn" href="{% url template %}">获取更多网页模板<span></span></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

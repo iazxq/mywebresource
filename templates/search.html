@@ -1,0 +1,58 @@
+{% extends "site.html" %}
+{%load filters%}
+{%load search_form_tag%}
+{%load article_list_item_tag%}
+{%load topic_list_tag%}
+{%load pager_tag%}
+{% block title %}{% endblock %}
+
+{% block main %}
+<!--第一列-->
+<div id=col1>
+<h1>
+<a href="/">首页</a>&nbsp;&gt;&nbsp;搜索:{{keyword}}
+</h1>
+<p class=dotted align=center>
+{%search_form_tag%}
+{%for article in article_list%}
+{%article_list_item_tag article%}
+{%endfor%}
+{%pager_tag pager%}
+
+</div>
+<!--第一列end-->
+
+<!--第二列-->
+<div id=col2>
+<h1>{{topic.title}}</h1>
+<ul>
+  {%for category in category_list%}
+  <li><a href="/category/{{category.category_id}}">{{category.category_name}}</a></li>
+  {%endfor%}
+</ul>
+<div align="center">
+{% include "google/adsense_160_600.html"%}
+</div>
+<h1><a title="本类热门" href="#">本类热门</a></h1>
+<p><b>本类热门脚本</b></p>
+<ul>
+ {%for article in hot_article_list%}
+  <li><a title="{{article.title}}" href="/subject/{{article.id}}"  target=_blank>{{article.title}}</a></li>
+ {%endfor%}
+</ul>
+
+
+<span class=clear></span>
+</div>
+<!--第二列end-->
+
+<!--第三列-->
+<div id=col3>
+{% topic_list_tag %}
+
+<span class=clear></span>
+</div>
+<!--第三列结束-->
+
+
+{% endblock %}

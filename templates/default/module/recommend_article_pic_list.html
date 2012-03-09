@@ -1,0 +1,14 @@
+{% load filters%}
+<div class="port-carousel">
+    <div class="port-carousel-wrapper">
+        <ul id="hp-port-carousel">
+            {% for article in article_list %}
+            <li><a href="{% url detail article.id %}"> <img alt="{{ article.title }}" src="{{ article.small_pic }}"/>
+            </a> <span>{{ article.title|left_str:22 }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="#" id="port-carousel-next" class="port-next"><span></span></a>
+    <a href="#" id="port-carousel-prev" class="port-prev"><span></span></a>
+</div>

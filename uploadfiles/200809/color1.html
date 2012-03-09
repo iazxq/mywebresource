@@ -1,0 +1,92 @@
+<STYLE>.drag {
+CURSOR: hand; POSITION: relative
+}
+</STYLE>
+  <script>
+var sPosition;
+var showPerc=100;
+document.onmousedown=dragLayer
+document.onmouseup=new Function("dragMe=false")
+
+var Color= new Array();
+Color[0] = "00";
+Color[1] = "11";
+Color[2] = "22";
+Color[3] = "33";
+Color[4] = "44";
+Color[5] = "55";
+Color[6] = "66";
+Color[7] = "77";
+Color[8] = "88";
+Color[9] = "99";
+Color[10] = "AA";
+Color[11] = "BB";
+Color[12] = "CC";
+Color[13] = "DD";
+Color[14] = "EE";
+Color[15] = "FF";
+
+
+var rVal,gVal,bVal, cCol
+function chgBg() {
+	cCol = document.bgColor; rVal=cCol.substr(1,2); gVal=cCol.substr(3,2); bVal=cCol.substr(5,2);
+	ind = Math.round(showPerc/16); if (ind < 0) ind = 0; if (ind > 15) ind=15;
+
+	if (kObj.id =="knobImg") document.bgColor="#"+Color[ind]+gVal+bVal;
+	if (kObj.id =="knobImg1")  document.bgColor="#"+rVal+Color[ind]+bVal;
+	if (kObj.id =="knobImg2")  document.bgColor="#"+rVal+gVal+Color[ind];
+}
+
+var dragMe=false, kObj, yPos,direction
+function moveLayer() {
+if (event.button==1 && dragMe) {
+	oldY = kObj.style.pixelTop; kObj.style.pixelTop=temp2+event.clientY-yPos; 
+	if (kObj.style.pixelTop > oldY) direction="dn"; else direction="up";
+	if (kObj.style.pixelTop < 2 && direction=="up") {kObj.style.pixelTop=2; direction="dn";}
+	if (kObj.style.pixelTop > 102 && direction=="dn") {kObj.style.pixelTop=102; direction="up";}
+	sPosition=kObj.style.pixelTop; showPerc = (perCent[0].checked) ? sPosition-2 : (sPosition-2)/2*5; 
+	chgBg(); 
+	return false; }
+}
+function dragLayer() {
+if (!document.all) return;
+if (event.srcElement.className=="drag")	{dragMe=true; kObj=event.srcElement; temp2=kObj.style.pixelTop; yPos=event.clientY; document.onmousemove=moveLayer; }
+}
+</SCRIPT>
+  本例子只简单的改变了背景的颜色，也可以将这使用方法应用<br>
+  到如聊天室等程序上，可以让你的应用增添色彩. </div>
+<p></P>
+            <DIV id=outerLyr 
+            style="BACKGROUND-COLOR: #000000; HEIGHT: 120px; LEFT: 233px; POSITION: absolute; TOP: 111px; WIDTH: 23px; Z-INDEX: 1"><IMG 
+            class=drag id=knobImg src="../wybj/images/knob.jpg" 
+            style="HEIGHT: 17px; LEFT: 2px; TOP: 100px; WIDTH: 20px; Z-INDEX: 3"> 
+
+            <DIV id=innerLyr 
+            style="BACKGROUND-COLOR: #777777; HEIGHT: 117px; LEFT: 2px; POSITION: absolute; TOP: 2px; WIDTH: 20px; Z-INDEX: 2">
+            <DIV id=barLyr 
+            style="BACKGROUND-COLOR: #000000; HEIGHT: 110px; LEFT: 9px; POSITION: absolute; TOP: 5px; WIDTH: 2px; Z-INDEX: 1"></DIV></DIV></DIV>
+            <DIV id=outerLyr1 
+            style="BACKGROUND-COLOR: #000000; HEIGHT: 120px; LEFT: 268px; POSITION: absolute; TOP: 111px; WIDTH: 23px; Z-INDEX: 1"><IMG 
+            class=drag id=knobImg1 src="../wybj/images/knob.jpg" 
+            style="HEIGHT: 17px; LEFT: 2px; TOP: 100px; WIDTH: 20px; Z-INDEX: 3"> 
+
+            <DIV id=innerLyr1 
+            style="BACKGROUND-COLOR: #777777; HEIGHT: 117px; LEFT: 2px; POSITION: absolute; TOP: 2px; WIDTH: 20px; Z-INDEX: 2">
+            <DIV id=barLyr1 
+            style="BACKGROUND-COLOR: #000000; HEIGHT: 110px; LEFT: 9px; POSITION: absolute; TOP: 5px; WIDTH: 2px; Z-INDEX: 1"></DIV></DIV></DIV>
+            <DIV id=outerLyr2 
+            style="BACKGROUND-COLOR: #000000; HEIGHT: 120px; LEFT: 300px; POSITION: absolute; TOP: 111px; WIDTH: 23px; Z-INDEX: 1"><IMG 
+            class=drag id=knobImg2 src="../wybj/images/knob.jpg" 
+            style="HEIGHT: 17px; LEFT: 2px; TOP: 100px; WIDTH: 20px; Z-INDEX: 3"> 
+
+            <DIV id=innerLyr2 
+            style="BACKGROUND-COLOR: #777777; HEIGHT: 117px; LEFT: 2px; POSITION: absolute; TOP: 2px; WIDTH: 20px; Z-INDEX: 2">
+            <DIV id=barLyr2 
+            style="BACKGROUND-COLOR: #000000; HEIGHT: 110px; LEFT: 9px; POSITION: absolute; TOP: 5px; WIDTH: 2px; Z-INDEX: 1"></DIV></DIV></DIV>
+            <P><INPUT name=perCent type=radio value=false> Prozent <INPUT 
+            CHECKED name=perCent type=radio value=true> 255 </P>
+
+
+<br><br>
+
+查找更多Javascript代码，请登录 <a href="http://www.sharejs.com">http://www.sharejs.com</a>

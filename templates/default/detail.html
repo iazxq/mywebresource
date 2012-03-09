@@ -1,0 +1,183 @@
+{% extends "default/site.html" %}
+{% load filters%}
+{% block title %}{{article.title}}{% endblock %}
+{% block keywords %}{{ article.title }},{{ category.root_category.category_name }},{{ category.category_name }}{% endblock %}
+{% block description %}{{article.short_description}}{% endblock %}
+{% block head-nav %}<a href="{% url index %}">首页</a>&nbsp;&gt;&nbsp;<a href="{%url category category.root_category.category_id %}">{{category.root_category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="{% url category category.category_id%}">{{category.category_name}}</a>&nbsp;&gt;&nbsp;详细内容{% endblock %}
+{% block head %}
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/prettify.css"/>
+    <script>
+        jQuery(document).ready(function(){
+            prettyPrint();
+        });
+    </script>
+
+    {% if article.head_code %}
+        {{ article.head_code|safe }}
+    {% endif %}
+
+{% endblock %}
+{% block main-content %}
+
+    {%if article.body_code%}{{article.body_code}}{%endif%}
+    <div id="main-content">
+
+        <div id="post">
+            <div class="post-head">
+                <div class="post-date">{{ article.isrtdate|date:"d" }}<div><span>{{ article.isrtdate|date:"M" }}</span> {{ article.isrtdate|date:"Y" }}</div></div>
+                <h1>{{ article.title }}</h1>
+                <div class="clearfix"></div>
+            </div>
+            <ul class="post-meta">
+                <li class="post-author">{{ article.compatibility }}</li>
+                <li class="post-tags"><a href="{% url category category.category_id %}">{{ category.category_name }}</a></li>
+            </ul>
+
+            {% if article.demo_code %}
+                {{ article.demo_code|safe }}
+            {% endif %}
+            <p>{{ article.short_description }}</p>
+
+
+            {% if article.pic %}
+            <p> <img src="{{ article.pic }}" /> </p>
+            {% endif %}
+        
+            <p>
+            {% if article.demo_url %}
+                <a class="btn" href="{{ article.demo_url }}" target="_blank">查看演示页面 View Demo</a>
+            {% endif %}
+                {%if article.dev_view_code%}
+                <a class="btn" href="{% url subject.devviewcode article.id %}" target="_blank">查看全部代码 View Code</a>
+            {% endif %}
+            </p>
+        
+            <p>
+                {% if article.description %}
+                    {{article.description|ubb_to_html|safe}}
+                {% endif %}
+            </p>
+        
+            <p>
+                {% if article.full_download_url %}
+                <h2>下载"{{ article.title }}"</h2>
+
+                    <script src="http://pstatic.xunlei.com/js/webThunderDetect.js"></script>
+                    <script src="http://pstatic.xunlei.com/js/base64.js"></script>
+                    <script language="javascript">
+                        var thunder_url = "http://www.sharejs.com/download/{{ article.id }}";
+                        var thunder_pid = "02184";
+                        var restitle = "{{ article.title }}";
+                        document.write('<a class="btn" href="#" thunderHref="' + ThunderEncode(thunder_url) + '" thunderPid="' + thunder_pid + '" thunderResTitle="' + restitle + '" onClick="return OnDownloadClick_Simple(this,2,4)" oncontextmenu="ThunderNetwork_SetHref(this)">迅雷专用高速下载[推荐]</a> ');
+                    </script>
+                    <a class="btn" href="{% url download article.id %}">本地下载</a>
+                {% endif %}
+
+                {% include "google/adsense_468_60.html" %}
+            </p>
+            
+            {% if tag_list %}
+            <p>Tags: {% for tag in tag_list %}<a href="{% url tag tag.tag %}">{{ tag.tag }}</a> {% endfor %}</p>
+            {% endif %}
+        
+            <p>    上一篇：
+                {%if prev_article%}
+                    <a href="/subject/{{prev_article.id}}">{{prev_article.title}}</a>
+                {%else%}
+                    没有了
+                {%endif%} &nbsp;<br/>
+                下一篇：
+                {%if next_article%}
+                    <a href="/subject/{{next_article.id}}">{{next_article.title}}</a>
+                {%else%}
+                    没有了
+                {%endif%}
+            </p>
+
+            <p><a href="{% url subject.recommend article.id %}" class="arrow-link">推荐给朋友<span></span></a></p>
+            
+            <!-- JiaThis Button BEGIN -->
+            <div id="ckepop">
+                <span class="jiathis_txt">分享到：</span>
+                <a class="jiathis_button_tools_1"></a>
+                <a class="jiathis_button_tools_2"></a>
+                <a class="jiathis_button_tools_3"></a>
+                <a class="jiathis_button_tools_4"></a>
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+                <a class="jiathis_counter_style"></a>
+            </div>
+            <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+            <!-- JiaThis Button END -->
+            <div class="clearfix"></div>
+        
+        
+
+            <p>
+            <h2>精彩推荐：</h2>
+            <ul class="port-columns">
+                {% for article in all_recommend_article_list %}
+                    <li class="three-col {% cycle '' 'end-col' %}">
+                        <div class="port-bg">
+                            <div class="port-overlay"></div>
+                            {% if article %}
+                                {% if article.pic %}
+                                <a href="{% url detail article.id %}">
+                                    <img alt="{{ article.title }}" src="{{ article.pic }}" class="big-img"/>
+                                    <span>{{ article.title }}</span>
+                                </a>
+                                {% else %}
+                                    <a href="{% url detail article.id %}">
+                                    <div class="big-img-default"><span class="fz14">{{ article.title }}</span></div>
+                                    </a>
+                                {% endif %}
+                            {% else %}
+                                {% include 'google/adsense_200_200.html' %}
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            </p>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <div id="sidebar">
+        <div class="widget">
+            <h3>{{ category.category_name }} NEW</h3>
+            <ul  class="bullet-list">
+                {% for article in new_article_list %}
+                    <li><a href="{% url detail article.id %}">{{ article.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% include "google/adsense_250_250.html" %}
+        </div>
+
+        <div class="widget">
+            <ul id="social-nav" class="sub-ruler">
+                <li><a href="#t1-sidebar">精品推荐</a></li>
+                <li><a href="#t2-sidebar">热门点击</a></li>
+            </ul>
+            <div id="t1-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in recommend_article_list %}
+                        <li><a href="{% url detail article.id %}">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="t2-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in hot_article_list %}
+                        <li><a href="{% url detail article.id %}">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

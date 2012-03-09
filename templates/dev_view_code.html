@@ -1,0 +1,25 @@
+{% extends "site.html" %}
+{%load filters%}
+{% block title %}{{article.title}} 查看源代码{% endblock %}
+{% block keywords %}{{ article.title }},{{ category.root_category.category_name }},{{ category.category_name }}{% endblock %}
+
+{% block main %}
+<div id=endpagecol1 style="width:950px">
+<h1><a href="/">首页</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.root_category.category_id}}">{{category.root_category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.category_id}}">{{category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="/subject/{{article.id}}">{{article.title}}</a>&nbsp;&gt;&nbsp;查看源代码</h1>
+<p class=dotted align=center><span class="f14">{{article.title}} - 源码查看</span><br>
+    {%if article.compatibility%}兼容性：{{article.compatibility}}{%endif%}  &nbsp; 更新时间：{{article.isrtdate|format_date}}</p>
+<p class=dotted align=left>简介：{{article.short_description}}</p>
+
+<textarea id="sourcecode"  style="width:98%;height:500px">
+{{article.dev_view_code}}
+</textarea>
+<br /><br />
+<a href="/subject/{{article.id}}"> << 返回 "{{article.title}}"</a>
+<br />
+<p class=dotted align=left>
+{%include "google/adsense_336_280.html"%}
+<br></p>
+
+</div>
+
+{% endblock %}

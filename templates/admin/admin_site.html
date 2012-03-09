@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+    <title>{% block title %}{% endblock %} 管理后台 </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta http-equiv="Pragma" content="no-cache" /> 
+    <meta content="sharejs.com Admin" name="description" />
+    <link href="/css/admin.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- head -->
+<div id="head">
+    <div class="title">sharejs.com 管理后台</div>
+    <div class="menu">
+        <ul>
+            <li><a href="/admin">管理首页</a></li>
+            <li><a href="category">分类管理</a></li>
+            <li><a href="article">文章管理</a></li>
+            <li><a href="logout">退出登录</a></li>
+        </ul>
+    </div>
+    {% block sub_menu %}{% endblock %}
+    <div class="clear"></div>
+</div>
+<!-- //end head -->
+
+
+<div id="main">
+{% block content %}{% endblock %}
+</div>
+
+<div class="clear"></div>
+<div id="bottom">
+<div class="footer_copyright">Copyright (C) sharejs.com 2004-2012, All Rights Reserved</div>
+</div>
+</body>
+</html>

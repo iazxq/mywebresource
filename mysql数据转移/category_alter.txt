@@ -1,0 +1,17 @@
+--更新category表
+ALTER TABLE `js`.`Category` CHANGE COLUMN `CategoryID` `category_id` int(11) NOT NULL DEFAULT '0', CHANGE COLUMN `CategoryName` `category_name` varchar(50) DEFAULT '', CHANGE COLUMN `ParentCategoryID` `parent_category_id` int(11) DEFAULT '0', CHANGE COLUMN `Url` `url` varchar(255) DEFAULT '', CHANGE COLUMN `ListUrl` `list_url` varchar(255) DEFAULT '', CHANGE COLUMN `EditUrl` `edit_url` varchar(255) DEFAULT '', CHANGE COLUMN `NeedTopPic` `need_top_pic` int(11) DEFAULT '0', CHANGE COLUMN `ArticleType` `article_type` int(11) DEFAULT '0', CHANGE COLUMN `IncludeFile` `include_file` varchar(50) DEFAULT '', CHANGE COLUMN `RootCategoryName` `root_category_name` varchar(50) DEFAULT '', CHANGE COLUMN `RootCategoryID` `root_category_id` int(11) DEFAULT '0', CHANGE COLUMN `Description` `description` varchar(2000) DEFAULT '', DROP PRIMARY KEY, ADD PRIMARY KEY (`category_id`);
+
+
+
+
+
+--更新js表
+ALTER TABLE `js`.`JS` CHANGE COLUMN `ID` `id` int(11) NOT NULL DEFAULT '0', CHANGE COLUMN `RootCategoryID` `root_category_id` int(11) DEFAULT '0', CHANGE COLUMN `CategoryID` `category_id` int(11) DEFAULT '0', CHANGE COLUMN `CategoryID2` `category_id2` int(11) DEFAULT '0', CHANGE COLUMN `CategoryID3` `category_id3` int(11) DEFAULT '0', CHANGE COLUMN `Title` `title` varchar(255) DEFAULT '', CHANGE COLUMN `Author` `author` varchar(50) DEFAULT '', CHANGE COLUMN `Source` `source` varchar(255) DEFAULT '', CHANGE COLUMN `ShortDescription` `short_description` varchar(2000) DEFAULT '', CHANGE COLUMN `Description` `description` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '', CHANGE COLUMN `DemoCode` `demo_code` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '', CHANGE COLUMN `DemoUrl` `demo_url` varchar(255) DEFAULT '', CHANGE COLUMN `DevViewCode` `dev_view_code` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '', CHANGE COLUMN `FullDownloadUrl` `full_download_url` varchar(255) DEFAULT '', CHANGE COLUMN `HeadCode` `head_code` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '', CHANGE COLUMN `BodyCode` `body_code` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '', CHANGE COLUMN `IsrtDate` `isrtdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP, CHANGE COLUMN `LastHitDate` `last_hit_date` timestamp NULL DEFAULT NULL, CHANGE COLUMN `Hits` `hits` int(11) DEFAULT '0', CHANGE COLUMN `Compatibility` `compatibility` varchar(50) DEFAULT '', CHANGE COLUMN `Recommend` `recommend` int(11) DEFAULT '0', CHANGE COLUMN `Pic` `pic` varchar(255) DEFAULT '', CHANGE COLUMN `SmallPic` `small_pic` varchar(255) DEFAULT '', CHANGE COLUMN `TopicID` `topic_id` int(11) DEFAULT '0', CHANGE COLUMN `State` `state` int(11) DEFAULT '0', CHANGE COLUMN `download` `download` int(11) DEFAULT '0', DROP PRIMARY KEY, ADD PRIMARY KEY (`id`);
+
+
+--admin表
+ALTER TABLE `js`.`Admin` CHANGE COLUMN `ID` `id` int(11) NOT NULL AUTO_INCREMENT, CHANGE COLUMN `UserName` `username` varchar(50) DEFAULT '', CHANGE COLUMN `Password` `password` varchar(50) DEFAULT '', CHANGE COLUMN `Grade` `grade` int(11) DEFAULT '0', DROP PRIMARY KEY, ADD PRIMARY KEY (`id`);
+
+
+--topic表
+ALTER TABLE `js`.`Topic` CHANGE COLUMN `TopicID` `topic_id` int(11) NOT NULL AUTO_INCREMENT, CHANGE COLUMN `Title` `title` varchar(50) DEFAULT '', CHANGE COLUMN `Pic` `pic` varchar(50) DEFAULT '', CHANGE COLUMN `IsrtDate` `isrtdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP, DROP PRIMARY KEY, ADD PRIMARY KEY (`topic_id`);

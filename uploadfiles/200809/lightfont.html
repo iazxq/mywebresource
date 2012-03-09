@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>荧光灯效果 - 分享JavaScript-sharejs.com</title>
+</head>
+<body>
+
+<h2 style="background-color:black">
+<script language="JavaScript1.2">
+
+//下面设置显示效果的属性
+var message="欢迎分享JavaScript ShareJS.com!"
+var neonbasecolor="gray"
+var neontextcolor="yellow"
+var flashspeed=100  //in milliseconds
+
+///No need to edit below this line/////
+
+var n=0
+if (document.all){
+document.write('<font color="'+neonbasecolor+'">')
+for (m=0;m<message.length;m++)
+document.write('<span id="neonlight">'+message.charAt(m)+'</span>')
+document.write('</font>')
+
+//cache reference to neonlight array
+var tempref=document.all.neonlight
+}
+else
+document.write(message)
+
+function neon(){
+
+//Change all letters to base color
+if (n==0){
+for (m=0;m<message.length;m++)
+tempref[m].style.color=neonbasecolor
+}
+
+//cycle through and change individual letters to neon color
+tempref[n].style.color=neontextcolor
+
+if (n<tempref.length-1)
+n++
+else{
+n=0
+clearInterval(flashing)
+setTimeout("beginneon()",1500)
+return
+}
+}
+
+function beginneon(){
+if (document.all)
+flashing=setInterval("neon()",flashspeed)
+}
+beginneon()
+
+
+</script>
+</h2>
+
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

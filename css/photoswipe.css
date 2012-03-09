@@ -1,0 +1,133 @@
+/*
+ * photoswipe.css
+ * Copyright (c) %%year%% by Code Computerlove (http://www.codecomputerlove.com)
+ * Licensed under the MIT license
+ *
+ * Default styles for PhotoSwipe
+ * Avoid any position or dimension based styles
+ * where possible, unless specified already here.
+ * The gallery automatically works out gallery item
+ * positions etc.
+ */
+
+ 
+body.ps-active, body.ps-building 
+{
+	overflow: hidden;
+}
+
+body.ps-active * 
+{ 
+	display: none;
+}
+body.ps-active *:focus 
+{ 
+	outline: 0; 
+}
+
+/* UILayer */
+div.ps-uilayer { 
+	cursor: pointer;
+}
+
+div.ps-zoom-pan-rotate *  { display: block; }
+
+/* Caption */
+div.ps-caption
+{ 
+	font-size: 13px;
+	text-align: center;
+}
+div.ps-caption *  { display: inline; }
+
+div.ps-caption-bottom
+{ 
+	border-bottom: none;
+	min-height: 44px;
+}
+
+div.ps-caption-content
+{
+	padding: 13px;
+	display: block;
+}
+
+/* Toolbar */
+div.ps-toolbar
+{ 
+	font-size: 13px;
+	text-align: center;
+	height: 44px;
+	display: table;
+	table-layout: fixed;	
+}
+
+div.ps-toolbar * { 
+	display: block;
+}
+
+div.ps-toolbar-top 
+{
+	border-top: none;
+}
+
+div.ps-toolbar-close, div.ps-toolbar-previous, div.ps-toolbar-next, div.ps-toolbar-play
+{
+	cursor: pointer;
+	float: left;
+	width: 5%;	
+}
+
+div.ps-toolbar-close {
+	margin: 0 5%;
+}
+
+div.ps-toolbar-play {
+	margin: 0 32.5%;
+}
+
+div.ps-toolbar-previous {
+
+	margin: 0 1% 0 2.25%;
+	width: 3%;
+}
+
+div.ps-toolbar-next {
+	margin: 0 2.25% 0 1%;
+	width: 3%;	
+}
+
+div.ps-toolbar div div.ps-toolbar-content
+{
+	width: 20px;
+	height: 20px;
+	margin: 12px auto 0;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+div.ps-toolbar-previous-disabled div.ps-toolbar-content
+{
+	background-color: transparent;
+	background-image: none;
+}
+
+div.ps-toolbar-next-disabled div.ps-toolbar-content
+{
+	background-color: transparent;
+	background-image: none;
+}
+
+
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+div.ps-toolbar-close, div.ps-toolbar-previous, div.ps-toolbar-next, div.ps-toolbar-play
+{
+	float: none;
+	width: auto;
+	margin: 0;
+	display: table-cell;
+}
+
+}

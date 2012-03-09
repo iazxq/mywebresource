@@ -1,0 +1,74 @@
+{% extends "default/site.html" %}
+{% load filters%}
+{% block title %}{{article.title}}查看全部源代码{% endblock %}
+{% block keywords %}{{ article.title }},{{ category.root_category.category_name }},{{ category.category_name }},推荐给朋友{% endblock %}
+{% block description %}{{article.short_description}},查看全部源代码{% endblock %}
+{% block head-nav %}<a href="{% url index %}">首页</a>&nbsp;&gt;&nbsp;<a href="{%url category category.root_category.category_id %}">{{category.root_category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="{% url category category.category_id%}">{{category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="{% url detail article.id %}">{{ article.title }}</a>&nbsp;&gt;&nbsp;查看全部源代码{% endblock %}
+{% block head %}
+    <script type="text/javascript" src="/js/prettify.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/prettify.css"/>
+    <script>
+        jQuery(document).ready(function(){
+            prettyPrint();
+        });
+    </script>
+
+{% endblock %}
+{% block main-content %}
+
+    {%if article.body_code%}{{article.body_code}}{%endif%}
+    <div id="main-content">
+        <div id="post">
+            <div class="post-head">
+                <div class="post-date">{{ article.isrtdate|date:"d" }}<div><span>{{ article.isrtdate|date:"M" }}</span> {{ article.isrtdate|date:"Y" }}</div></div>
+                <h1>《{{ article.title }}》查看源代码 </h1>
+                <div class="clearfix"></div>
+            </div>
+            <ul class="post-meta">
+                <li class="post-author">{{ article.compatibility }}</li>
+                <li class="post-tags">{{ category.category_name }}</li>
+            </ul>
+            <p>{{ article.short_description }}</p>
+
+            <p><pre class="prettyprint html linenums">{{article.dev_view_code}}</pre></p>
+
+            <div class="clearfix"></div>
+
+            <p><a href="{% url detail article.id %}" class="btn">返回 《{{ article.title }}》</a></p>
+        </div>
+
+
+
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <div id="sidebar">
+        <div class="widget">
+            {% include "google/adsense_250_250.html" %}
+        </div>
+
+        <div class="widget">
+            <ul id="social-nav" class="sub-ruler">
+                <li><a href="#t1-sidebar">精品推荐</a></li>
+                <li><a href="#t2-sidebar">热门点击</a></li>
+            </ul>
+            <div id="t1-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in recommend_article_list %}
+                        <li><a href="{% url detail article.id %}">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="t2-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in hot_article_list %}
+                        <li><a href="{% url detail article.id %}">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

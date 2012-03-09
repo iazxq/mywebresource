@@ -1,0 +1,38 @@
+{% extends "admin/admin_site.html" %}
+{% load filters %}
+{%load pager_tag%}
+{% block title %}类别管理{% endblock %}
+{% block sub_menu %}{% include "admin/category_sub_menu.html" %}{% endblock %}
+{% block content %}
+<script language="javascript" type="text/javascript">
+function del(category_id,category_name){
+    if (confirm("确定删除《" + category_name +"》?"))
+        location.href="category_remove?category_id=" + category_id;
+}
+</script>
+
+
+<table>
+    <tr class="head">
+        <td width="50">编号</td>
+        <td width="200">名称</td>
+        <td width="70">上级分类</td>
+        <td width="80">根分类</td>
+        <td width="80">类别</td>
+        <td>简介</td>
+        <td width="100">操作</td>
+    </tr>
+    {% for category in category_list %}
+    <tr class="{% cycle row1,row2 %}">
+        <td>{{ category.category_id }}</td>
+        <td><a href="{% url admin.category_list %}?parent_category_id={{ category.category_id }}">{{ category.category_name }}</a></td>
+        <td><a href="{% url admin.category_list %}?parent_category_id={{ category.parent_category_id }}">{{ category.parent_category_id }}</a></td>
+        <td><a href="{% url admin.category_list %}?parent_category_id={{ category.root_category_id }}">{{ category.root_category_id }}</a></td>
+        <td>{{ category.article_type }}</td>
+        <td>{{ category.description|left_str:100 }}</td>
+        <td><a href="category_edit?category_id={{category.category_id }}">改</a> | <a href="javascript:void(0)" onclick="del('{{category.category_id }}','{{ category.category_name }}')">删</a></td>
+    </tr>
+    {%endfor  %}
+</table>
+
+{% endblock %}

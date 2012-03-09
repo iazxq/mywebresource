@@ -1,0 +1,162 @@
+{% extends "site.html" %}
+{%load filters%}
+{% block title %}{{article.title}}{% endblock %}
+{% block head %}
+    <script type="text/javascript" src="/js/prettify.js"></script>
+	<link type="text/css" rel="stylesheet" href="/js/prettify.css"/>
+	<script type="text/javascript">prettyPrint();</script>
+    {%if article.head_code%}{{article.head_code|safe}}{%endif%}
+{% endblock %}
+
+{% block keywords %}{{ article.title }},{{ category.root_category.category_name }},{{ category.category_name }}{% endblock %}
+{% block description %}{{article.short_description}}{% endblock %}
+
+
+{% block main %}
+{%if article.body_code%}{{article.body_code}}{%endif%}
+
+<div id="endpagecol1">
+<h1><a href="/">首页</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.root_category.category_id}}">{{category.root_category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.category_id}}">{{category.category_name}}</a>&nbsp;&gt;&nbsp;详细内容</h1>
+<p class=dotted align=center><span class="f14">{{article.title}}</span><br>
+    {%if article.compatibility%}兼容性：{{article.compatibility}}{%endif%}  &nbsp; 更新时间：{{article.isrtdate|format_date}}</p>
+<p class=dotted align=left>简介：{{article.short_description}}</p>
+
+    <!--显示演示代码-->
+    {%if article.demo_code%}
+    <p class="f14">效果演示：</p>
+    {{article.demo_code|safe}}
+    {%else%}
+        {%if article.pic%}
+            <img src="{{article.pic|lower}}" border="0" />
+        {%endif%}
+    {%endif%}
+    <!--演示代码end-->
+
+
+ <!--显示demo连接-->
+     {%if article.demo_url%}
+        <br>
+       <a href='{{article.demo_url}}'><img src='/images2/demo.gif' alt='{{article.title}}' border='0'></a>
+     {%endif%}
+ <!--demo连接结束-->
+
+ <!--查看全部源码-->
+    {%if article.dev_view_code%}
+    <br /><br />
+    <span class="t1">查看源代码：</span><a href="/subject/{{article.id}}/devviewcode">查看</a>
+    {%include "google/adsense_468_15.html"%}
+    {%endif%}
+ <!--查看全部源码end-->
+
+
+
+ <p class=dotted align=left>
+{%include "google/adsense_468_60.html"%}
+<br></p>
+
+ <!--代码使用方法-->
+  {%if article.description%}
+    <br /><br />
+    <span class="t1">使用说明：</span><br />
+    <pre>
+    {{article.description|ubb_to_html|safe}}
+    </pre>
+  {%endif%}
+  <br>
+  <!--代码使用方法end-->
+
+  {%if article.full_download_url%}
+  <!--下载-->
+
+
+       <br> <span class="t1">下载：</span>
+       <!--  JavaScript专用链代码 -->
+
+<script src="http://pstatic.xunlei.com/js/webThunderDetect.js"></script>
+<script src="http://pstatic.xunlei.com/js/base64.js"></script>
+<script language="javascript">
+    var thunder_url = "http://www.sharejs.com/download/{{article.id}}";
+    var thunder_pid = "02184";
+    var restitle = "{{article.title}}";
+    document.write('<a href="#" thunderHref="' + ThunderEncode(thunder_url) + '" thunderPid="' + thunder_pid + '" thunderResTitle="' + restitle + '" onClick="return OnDownloadClick_Simple(this,2,4)" oncontextmenu="ThunderNetwork_SetHref(this)">迅雷专用高速下载[推荐]</a> ');
+</script>
+
+       &nbsp; &nbsp;
+        <a href="/download/{{article.id}}" target="_blank">从本地下载</a>
+
+
+        <div align="left">
+       {%include "google/adsense_336_280.html"%}
+
+   </div>
+  <!--下载end-->
+    {%endif%}
+
+</P>
+
+
+{%if article.source%}
+<p class=dotted align=right>
+出处：{{article.source|ubb_to_html|safe}}
+</p>
+{%endif%}
+
+
+    <!-- JiaThis Button BEGIN -->
+<div id="ckepop">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+<br>
+
+<p class=dotted>
+    上一篇：
+    {%if prev_article%}
+        <a href="/subject/{{prev_article.id}}">{{prev_article.title}}</a>
+    {%else%}
+        没有了
+    {%endif%} &nbsp;
+    下一篇:
+    {%if next_article%}
+        <a href="/subject/{{next_article.id}}">{{next_article.title}}</a>
+    {%else%}
+        没有了
+    {%endif%}
+</p>
+</div>
+
+<div id=col3>
+<h1><a title=本类最新资源 href="/category/{{category.category_id}}">本类最新资源</a></h1>
+<p>本类最新</p>
+<ul>
+{%for new_article in new_article_list %}
+<li><a href="/subject/{{new_article.id}}">{{new_article.title}}</a></li>
+{%endfor%}
+</ul>
+
+<h1><a title=本类热门资源 href="/category/{{category.category_id}}">本类热门资源</a></h1>
+<p>本类热门</p>
+<ul>
+{%for hot_article in hot_article_list %}
+<li><a href="/subject/{{hot_article.id}}">{{hot_article.title}}</a></li>
+{%endfor%}
+</ul>
+
+<br><br>
+
+</div>
+
+
+
+<span class=clear></span>
+
+
+{% endblock %}

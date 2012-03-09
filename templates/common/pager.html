@@ -1,0 +1,28 @@
+{% if pager.need_pager %}
+<div class="clear"></div>
+<div class="pager">
+    {% if pager.has_prev_page %}
+        <a href="?{{ pager.prev_page.params }}">>前页</a>
+    {% else %}
+        <span class="disabled"><前页</span>
+    {% endif %}
+
+    {% for page in pager.pages %}
+        {% ifequal page.index pager.current_page%}
+             <span class="current">{{ page.index }}</span>
+        {% else %}
+            {% if page.index %}
+                <a href="?{{ page.params }}">{{ page.index }}</a>
+            {% else %}
+                ...
+            {% endif %}
+        {% endifequal %}
+    {% endfor %}
+
+    {% if pager.has_next_page %}
+        <a href="?{{ pager.next_page.params }}">后页></a>
+    {% else %}
+         <span class="disabled">后页></span>
+    {% endif %}
+</div>
+{% endif %}

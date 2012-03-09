@@ -1,0 +1,174 @@
+<html>
+<head>
+<title>表格形式的调色板</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<style type="text/css">
+<!--
+body {font:menu}
+td,selcet,input {  font:menu}
+.memo {  border: 1px #dddddd solid}
+.button {  border-color: #CCCCCC #666666 #666666 #CCCCCC; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.cursorcross {  cursor: crosshair}
+.cursorhand {  cursor: hand}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div align="center"><b><font color="#003366">表格形式的调色板</font></b><br>
+<br>
+</div>
+<table border="0" cellspacing="1" cellpadding="3" width="350" align="center" bgcolor="#dddddd">
+<tr bgcolor="#FFFFFF"> 
+<td width="10%" align="center"> 
+<select name="select1" onchange="selectchg(this.value)">
+<option value="1" selected>红</option>
+<option value="2">绿</option>
+<option value="3">蓝</option>
+<option value="4">灰</option>
+</select>
+</td>
+<td width="90%" align="center"> 
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+<td align="right"> 
+<input type="text" name="text1" class="memo" size="10">
+<input type="button" name="Button2" value="&gt;&gt;" class="button" onClick="choosecolor()">
+</td>
+<td align="right" width="3%">&nbsp;</td>
+<td width="30%"> 
+<table width="40" border="0" cellspacing="1" cellpadding="0" height="20"  class="cursorcross">
+<tr> 
+<td id="customcolor" bgcolor="#FFFFFF"  onMouseOver="showcolor(this)">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr bgcolor="#FFFFFF"> 
+<td width="10%" align="center"> 
+<table id="tableleft" border="0" cellspacing="1" cellpadding="0" class="cursorhand">
+<script language="VBScript">
+function hexit(which)
+hexit=hex(which)
+end function
+</script>
+<script language="JavaScript">
+for(i=0;i<=15;++i)
+{document.write('<tr><td align="center">'+ hexit(0+i*17) +'</td><td id="tdleft' + i +'" bgcolor="rgb('+ (0+i*17) + ',0,0)" width="15" height="15" onclick="changeright(this.num)" onmouseover="showcolor(this)"></td></tr>')
+ document.all['tdleft' + i].num=i
+}
+</script>
+</table>
+</td>
+<td align="center" width="90%"> 
+<table id="tableleft" border="0" cellspacing="1" cellpadding="0" class="cursorcross">
+<script language="JavaScript">
+document.write('<tr><td></td>')
+for(i=0;i<=15;++i)
+{document.write('<td align="center">'+ hexit(0+i*17) +'</td>')}
+document.write('</tr>')
+
+for(i=0;i<=15;++i)
+{document.write('<tr>')
+ document.write('<td align="center">'+ hexit(0+i*17) +'</td>')
+ for(j=0;j<=15;++j)
+  {document.write('<td id="tdrightr' + i + 'c' + j +'" bgcolor="rgb(0,'+ (0+i*17) + ',' + (0+j*17) + ')" width="15" height="15" onmouseover="showcolor(this)" onclick="clickright(this)"></td>')}
+ document.write('</tr>')
+}
+
+</script>
+</table>
+</td>
+</tr>
+<tr bgcolor="#FFFFFF"> 
+<td colspan="2" height="20">·可选16*16*16种颜色。<br>
+·单击左边的颜色会得到更多的颜色。<br>
+·单击右边的颜色会固定选取的颜色。 <br>
+·输入框可以自定义颜色。</td>
+</tr>
+</table>
+<script language="JavaScript">
+function selectchg(which)
+{switch(which)
+  {case '1' :leftR();break;
+   case '2' :leftG();break;
+   case '3' :leftB();break;
+   case '4' :leftA();break;
+  }
+}
+function leftR()
+{for(i=0;i<=15;++i)
+   {document.all['tdleft'+i].bgColor='rgb('+ (0+i*17) + ',0,0)'}
+ rightR(0)
+}
+function leftG()
+{for(i=0;i<=15;++i)
+   {document.all['tdleft'+i].bgColor='rgb(0,'+ (0+i*17) + ',0)'}
+ rightG(0)
+}
+function leftB()
+{for(i=0;i<=15;++i)
+   {document.all['tdleft'+i].bgColor='rgb(0,0,'+ (0+i*17) + ')'}
+ rightB(0)
+}
+function leftA()
+{for(i=0;i<=15;++i)
+   {document.all['tdleft'+i].bgColor='rgb('+ (0+i*17) + ','+ (0+i*17) + ','+ (0+i*17) + ')'}
+ rightA()
+}
+function rightR(which)
+{for(i=0;i<=15;++i)
+   {for(j=0;j<=15;++j)
+     {document.all['tdrightr' + i + 'c' + j].bgColor='rgb(' + (0+which*17) + ',' + (0+i*17) + ','+ (0+j*17) + ')'}
+    }
+}
+function rightG(which)
+{for(i=0;i<=15;++i)
+   {for(j=0;j<=15;++j)
+     {document.all['tdrightr' + i + 'c' + j].bgColor='rgb(' + (0+i*17) + ',' + (0+which*17) +  ',' + (0+j*17) + ')'}
+    }
+}
+function rightB(which)
+{for(i=0;i<=15;++i)
+   {for(j=0;j<=15;++j)
+     {document.all['tdrightr' + i + 'c' + j].bgColor='rgb(' + (0+i*17) + ','+ (0+j*17)+ ',' + (0+which*17) + ')'}
+    }
+}
+function rightA()
+{for(i=0;i<=15;++i)
+   {for(j=0;j<=15;++j)
+     {document.all['tdrightr' + i + 'c' + j].bgColor='rgb(' + (0+i*16+j) + ','+ (0+i*16+j)+ ',' + (0+i*16+j) + ')'}
+    }
+}
+var rightclicked=false
+function clickright(which)
+{if(rightclicked){rightclicked=false;showcolor(which)}else{rightclicked=true}
+}
+function changeright(which)
+{switch(select1.value)
+  {case '1' :rightR(which);break;
+   case '2' :rightG(which);break;
+   case '3' :rightB(which);break;
+ }
+}
+function showcolor(which)
+{if(rightclicked)return;
+ text1.value=which.bgColor
+ choosecolor()
+}
+function choosecolor()
+{customcolor.bgColor=text1.value
+}
+</script>
+
+
+<br><br>
+查找更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+
+
+</body>
+</html>
+

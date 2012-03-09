@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+</head>
+<body>
+
+<script language="JavaScript1.2">
+<!--
+
+/*
+Conveyor belt slideshow script- 
+?Dynamic Drive (www.dynamicdrive.com)
+For full source code, 100's more DHTML scripts, and Terms Of Use, visit dynamicdrive.com
+*/
+
+
+//Specify the slider's width (in pixels)
+var sliderwidth=330
+//Specify the slider's height (in pixels, pertains only to NS)
+var sliderheight=145
+//Specify the slider's scroll speed (larger is faster)
+var slidespeed=4
+
+//Specify the slider's images
+var leftrightslide=new Array()
+var finalslide=''
+leftrightslide[0]='<a href="http://www.sharejs.com"><img src="img/dynamicbook1.gif" border=1></a>'
+leftrightslide[1]='<a href="http://www.sharejs.com"><img src="img/dynamicbook2.gif" border=1></a>'
+leftrightslide[2]='<a href="http://www.sharejs.com"><img src="img/dynamicbook3.gif" border=1></a>'
+leftrightslide[3]='<a href="http://www.sharejs.com"><img src="img/dynamicbook4.gif" border=1></a>'
+leftrightslide[4]='<a href="http://www.sharejs.com"><img src="img/dynamicbook5.gif" border=1></a>'
+
+///////do NOT edit pass this line////////////////////////////////////
+
+var copyspeed=slidespeed
+//copy contents of leftrightslide into one variable
+for (i=0;i<leftrightslide.length;i++)
+finalslide=finalslide+leftrightslide[i]+"&nbsp;&nbsp;"
+
+
+if (document.all){
+//dynamically write out the marquee tag
+document.write('<marquee id="ieslider" scrollAmount=0 style="width:'+sliderwidth+'">'+finalslide+'</marquee>')
+//stop marquee when mouse is over it
+ieslider.onmouseover=new Function("ieslider.scrollAmount=0")
+//re-enable marquee when mouse is out
+ieslider.onmouseout=new Function("if (document.readyState=='complete') ieslider.scrollAmount=slidespeed")
+}
+
+function regenerate(){
+window.location.reload()
+}
+function regenerate2(){
+if (document.layers){
+document.ns_slider01.visibility="show"
+setTimeout("window.onresize=regenerate",450)
+intializeleftrightslide()
+}
+if (document.all)
+ieslider.scrollAmount=slidespeed
+}
+
+//NS specific function for initializing slider upon page load
+function intializeleftrightslide(){
+document.ns_slider01.document.ns_slider02.document.write('<nobr>'+finalslide+'</nobr>')
+document. ns_slider01.document.ns_slider02.document.close()
+thelength=document.ns_slider01.document.ns_slider02.document.width
+scrollslide()
+}
+
+//NS specific function for sliding slideshow
+function scrollslide(){
+if (document.ns_slider01.document.ns_slider02.left>=thelength*(-1)){
+document.ns_slider01.document.ns_slider02.left-=slidespeed
+setTimeout("scrollslide()",100)
+}
+else{
+document.ns_slider01.document.ns_slider02.left=sliderwidth
+scrollslide()
+}
+}
+window.onload=regenerate2
+
+//-->
+</script>
+
+
+<ilayer width=&{sliderwidth}; height=&{sliderheight}; name="ns_slider01" visibility=hide>
+<layer name="ns_slider02" onMouseover="slidespeed=0;" onMouseout="slidespeed=copyspeed"></layer></ilayer>
+
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

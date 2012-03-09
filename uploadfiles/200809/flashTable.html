@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>闪烁的表格边框 - 分享JavaScript-sharejs.com</title>
+</head>
+<body>
+<table border="0" width="280" id="myexample" style="border:5px solid green">
+<tr>
+<td>
+欢迎分享JavaScript,<br>有了JavaScript，他好我也好。
+<br></td>
+</tr>
+</table>
+<script language="JavaScript1.2">
+<!--
+function flashit(){
+if (!document.all)
+return
+if (myexample.style.borderColor=="green")
+myexample.style.borderColor="red"
+else
+myexample.style.borderColor="green"
+}
+setInterval("flashit()", 500)
+//-->
+</script>
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>闪闪发光的链接 - 分享JavaScript-sharejs.com</title>
+
+</head>
+<body>
+
+
+<a href="http://www.sharejs.com" id="flashlink" flashtype=0 flashcolor="green">ShareJS.com</a> 
+<a href="http://www.sharejs.com" id="flashlink" flashtype=1 flashcolor="lime">ShareJS.com</a>
+
+<script language="JavaScript1.2">
+if (document.all&&document.all.flashlink){
+var flashlinks=document.all.flashlink
+if (flashlinks.length==null)
+flashlinks[0]=document.all.flashlink
+
+function changecolor(which,type,color){
+if (type==0){
+if (flashlinks[which].style.color!=color)
+flashlinks[which].style.color=color
+else
+flashlinks[which].style.color=''
+}
+else if (type==1){
+if (flashlinks[which].style.backgroundColor!=color)
+flashlinks[which].style.backgroundColor=color
+else
+flashlinks[which].style.backgroundColor=''
+}
+
+}
+
+if (flashlinks.length==null){
+var flashengine='setInterval("changecolor(0,'+flashlinks[0].flashtype+',\''+flashlinks[0].flashcolor+'\')",'+'1000)'
+eval(flashengine)
+}
+else
+for (i=0;i<flashlinks.length;i++){
+var flashengine='setInterval("changecolor('+i+','+flashlinks[i].flashtype+',\''+flashlinks[i].flashcolor+'\')",'+'1000)'
+eval(flashengine)
+}
+
+}
+</script>
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

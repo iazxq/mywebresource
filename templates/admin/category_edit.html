@@ -1,0 +1,61 @@
+{% extends "admin/admin_site.html" %}
+{% load filters %}
+{% block title %}分类管理{% endblock %}
+{% block sub_menu %}{% include "admin/category_sub_menu.html" %}{% endblock %}
+{% block content %}
+
+<form  method="post">
+<p class="message">{{ messages|first }}</p>
+<table>
+
+    <tr>
+        <td><div align="right"> 根类别：</div></td>
+        <td><input name="root_category_id" class="text_box" type="text" id="root_category_id" value="{{category.root_category_id}}"  /></td>
+    </tr>
+
+    <tr>
+        <td><div align="right"> 父类别：</div></td>
+        <td><input name="parent_category_id" class="text_box" type="text" id="parent_category_id" value="{{category.parent_category_id}}"  /></td>
+    </tr>
+
+    <tr>
+        <td><div align="right"> 编号：</div></td>
+        <td><input name="category_id" class="text_box" type="text" id="category_id" value="{{category.category_id}}"  /></td>
+    </tr>
+
+    <tr>
+        <td><div align="right"> 文章类别：</div></td>
+        <td><select name="article_type" id="article_type">
+            <option value="0">图文</option>
+            <option value="1">纯文字</option>
+            <option value="2">工具类</option>
+        </select></td>
+    </tr>
+
+    <tr>
+        <td><div align="right"> 简介：</div></td>
+        <td>
+            <textarea rows="5" cols="50" id="description" nmae="description">{{ category.description }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td><div align="right"> 名称：</div></td>
+        <td><input name="category_name" class="text_box" type="text" id="category_name" value="{{category.category_name}}"  /></td>
+    </tr>
+
+
+
+    <tr>
+    <td></td>
+    <td><input type="submit"  value="填写完成，提交" /></td>
+    </tr>
+
+</table>
+
+</form>
+
+    <script language="javascript">
+    $('#article_type').val('{{ category.article_type }}');
+    </script>
+{% endblock %}

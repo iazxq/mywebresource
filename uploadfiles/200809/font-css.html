@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>CSS生成的图标 - 分享JavaScript-sharejs.com</title>
+</head>
+<BODY bgColor=#ff0000 leftMargin=0 onload=doWave(0) topMargin=0>
+<TABLE border=0 cellPadding=0 style="FONT-SIZE: 9pt" width="100%">
+  <TBODY>
+  <TR>
+    <TD align=middle style="COLOR: rgb(255,255,0)" width="100%">
+      <SCRIPT language=JavaScript>
+
+function nextSize(i,incMethod,textLength)
+{
+if (incMethod == 1) return (32*Math.abs( Math.sin(i/(textLength/3.14))) );
+if (incMethod == 2) return (255*Math.abs( Math.cos(i/(textLength/3.14))));
+}
+
+function sizeCycle(text,method,dis)
+{
+	output = "";
+	for (i = 0; i < text.length; i++)
+	{
+		size = parseInt(nextSize(i +dis,method,text.length));
+		output += "<font style='font-size: "+ size +"pt'>" +text.substring(i,i+1)+ "</font>";
+	}
+	theDiv.innerHTML = output;
+}
+
+function doWave(n) 
+{   
+	theText = "======欢迎分享JavaScript======";
+	sizeCycle(theText,1,n);
+	if (n > theText.length) {n=0}
+	setTimeout("doWave(" + (n+1) + ")", 50);
+}
+</SCRIPT>
+
+      <DIV align=center id=theDiv></DIV></TD></TR>
+
+ </TBODY></TABLE>
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

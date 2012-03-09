@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+</head>
+<body>
+<input type="button" value="插入" onclick="insert_row()"> 
+
+<table name='tbl' id="tbl" border="1" width=300> 
+</table> 
+<script> 
+var i=0 
+function insert_row(){ 
+i++ 
+R=tbl.insertRow() 
+C=R.insertCell() 
+C.innerHTML="<input type='file' name='file' >" 
+C=R.insertCell() 
+C.innerHTML="文件"+i 
+C=R.insertCell() 
+C.innerHTML="<input type='button'  value='删除' onclick='tbl.deleteRow("+(i-1)+")'>" 
+
+} 
+</script> 
+
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

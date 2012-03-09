@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+</head>
+<body>
+
+
+<br>
+<input type="button" name="Button" value="闪烁的按钮 ShareJS.com" id=flashit>
+<script language="JavaScript1.2">
+if (document.all&&document.all.flashit){
+
+var flashelement=document.all.flashit
+if (flashelement.length==null)
+flashelement[0]=document.all.flashit
+
+function changecolor(which){
+if (flashelement[which].style.color=='')
+flashelement[which].style.color="red"
+else
+flashelement[which].style.color=""
+}
+
+
+if (flashelement.length==null)
+setInterval("changecolor(0)",1000)
+else
+for (i=0;i<flashelement.length;i++){
+var tempvariable='setInterval("changecolor('+i+')",'+'1000)'
+eval(tempvariable)
+}
+
+}
+</script>
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

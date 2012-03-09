@@ -1,0 +1,14 @@
+<br>
+<hr>
+<a href="http://www.sharejs.com">分享JavaScript</a><br>
+<a href="http://www.google.cn">Google.cn</a><br>
+<a href=""http://www.pdbooks.net>public domain books</a></br>
+<hr>
+<script>
+function random_all(){
+var myrandom=Math.round(Math.random()*(document.links.length-1))
+window.location=document.links[myrandom].href
+}
+</script>
+
+<input onClick=random_all() type=button value="随便看一看" name="button"> 

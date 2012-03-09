@@ -1,0 +1,71 @@
+{% extends "default/site.html" %}
+{% load filters%}
+{% load recommend_article_pic_list_tag %}
+{% load last_article_list_tag %}
+{% load article_list_text_tag %}
+{% block title %}JS脚本{% endblock %}
+{% block keywords %}js,javascript,脚本,jQuery,css,HTML5,jQuery插件,js特效,焦点广告效果,幻灯片效果,CSS菜单,浮动层,特效菜单,网页动画{% endblock %}
+{% block description %}提供最优秀的JS代码，jQuery插件,网页特效,HTML5代码，而且这一切都是免费的。{% endblock %}
+{% block port-carousel %}{% recommend_article_pic_list_tag recommend_article_pic_list%}{% endblock %}
+{% block main-content %}
+    <div id="main-content">
+
+        {% article_list_text_tag article_list_ad 132 '常用广告.焦点广告 AD' '' %}
+        {% article_list_text_tag article_list_image 119 '图片.相册.幻灯片 Image' 'end-col' %}
+        {% article_list_text_tag article_list_html5 757 'HTML5特效' '' %}
+        {% article_list_text_tag article_list_css  113 '样式控制.样式效果 CSS' 'end-col' %}
+        {% article_list_text_tag article_list_windows 116 '窗口.窗体.浮动层 Windows' '' %}
+        {% article_list_text_tag article_list_menu 117 '菜单.列表.特效菜单 Menu' 'end-col' %}
+        {% article_list_text_tag article_list_ajax 131 'Ajax相关' '' %}
+        {% article_list_text_tag article_list_reg 130 '正则表达式 Regex' 'end-col' %}
+        {% article_list_text_tag article_list_drag 133 '拖拽代码 Drag&Drop' '' %}
+        {% article_list_text_tag article_list_layout 136 'XHTML网页布局 Layout' 'end-col' %}
+        {% article_list_text_tag article_list_system 126 '系统相关 System' '' %}
+        {% article_list_text_tag article_list_cookie 127 'Cookie类' 'end-col' %}
+        {% article_list_text_tag article_list_form 128 '表单相关.表单控制 Form' '' %}
+        {% article_list_text_tag article_list_game 129 '游戏类.JS小游戏 Game' 'end-col' %}
+        {% article_list_text_tag article_list_components 134 'HTML控件 Components' '' %}
+        {% article_list_text_tag article_list_player 135 '影音播放 Player' 'end-col' %}
+        {% article_list_text_tag article_list_button 123 '按钮类 Button' '' %}
+        {% article_list_text_tag article_list_table 114 '表格操作 Table' 'end-col' %}
+        {% article_list_text_tag article_list_scroll 118 '滚动条.滚动效果 Scroll' '' %}
+        {% article_list_text_tag article_list_math 115 '数学.算法.数字 Math' 'end-col' %}
+        {% article_list_text_tag article_list_date 120 '日期.日历.时间相关 Date' '' %}
+        {% article_list_text_tag article_list_text 112 '文字字体.文本特效 Text' 'end-col' %}
+        {% article_list_text_tag article_list_color 110 '颜色.背景 Color' '' %}
+        {% article_list_text_tag article_list_link 111 '超级链接 Links' 'end-col' %}
+        {% article_list_text_tag article_list_mouse 121 '鼠标效果 Mouse' '' %}
+        {% article_list_text_tag article_list_keyboard 122 '键盘控制 Keyboard' 'end-col' %}
+        {% article_list_text_tag article_list_status 124 '状态栏 Status' '' %}
+        {% article_list_text_tag article_list_other 125 '其它代码 Other' 'end-col' %}
+
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <div id="sidebar">
+        {% last_article_list_tag 100%}
+        <div class="widget">
+            <ul id="social-nav" class="sub-ruler">
+                <li><a href="#t1-sidebar">Hot脚本</a></li>
+                <li><a href="#t2-sidebar">Hot网页模板</a></li>
+            </ul>
+            <div id="t1-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in hot_javascript_article_list %}
+                    <li><a href="{% url detail article.id %}"  target="_blank">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <a class="btn" href="{% url code %}">获取更多脚本<span></span></a>
+            </div>
+            <div id="t2-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in hot_template_article_list %}
+                        <li><a href="{% url detail article.id %}"  target="_blank">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <a class="btn" href="{% url template %}">获取更多网页模板<span></span></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

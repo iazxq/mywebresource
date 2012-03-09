@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>变色文字 - 分享JavaScript-sharejs.com</title>
+<Script language="JavaScript">
+
+var someText = "Welcome to my Website!!";	// the text
+var aChar;
+var aSentence;
+var i=0;					// a counter
+
+var colors = new Array("FF0000","FFFF66","FF3399","00FFFF","FF9900","00FF00"); // the colors
+var aColor;					// the chosen color
+
+function loadText()
+{
+	// randomly choose color
+	aColor = colors[Math.floor(Math.random()*colors.length)];
+
+	aChar = someText.charAt(i);
+	if (i == 0)
+		aSentence = aChar;
+	else
+		aSentence += aChar;	
+
+	// 50 iterations max.
+	if (i < 50)	i++;
+	
+	// For IE
+	if (document.all)
+	{
+		textDiv.innerHTML= "<font color='#"+aColor+"' face='Tahoma' size='5'><i>"+aSentence+"</i></font>";
+		setTimeout("loadText()",100);
+	}
+		
+	// For Netscape Navigator 4
+	else if (document.layers) 
+	{
+		document.textDiv.document.write("<font color='#"+aColor+"' face='Tahoma' 								size='5'><i>"+aSentence+"</i></font>");
+		document.textDiv.document.close();
+		setTimeout("loadText()",100);
+	}
+		
+	// For other
+	else if (document.getElementById)
+	{
+		document.getElementById("textDiv").innerHTML = "<font color='#"+aColor+"' 			face='Tahoma'size='5'><i>"+aSentence+"</i></font>";
+		setTimeout("loadText()",100);
+	}
+}
+</SCRIPT>
+</head>
+<body bgcolor="#000000" text="#ffffff" onLoad="loadText()">
+
+<div id="textDiv"></div>
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% load filters%}
+<div class="widget">
+    <h3>最新更新</h3>
+    <ul id="news-sidebar">
+        {% for article in article_list %}
+        <li>
+            <a href="{% url detail article.id %}"><img class="img-box fl" style="width:67px;height:48px;" src="{{ article.small_pic }} " alt="{{ article.title }}" /></a>
+            <a href="{% url detail article.id %}">{{ article.title }}</a>
+            <p> on <em>{{ article.isrtdate|format_date }}</em></p>
+        </li>
+        {% endfor %}
+
+    </ul>
+</div>

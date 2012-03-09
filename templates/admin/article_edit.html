@@ -1,0 +1,426 @@
+{% extends "admin/admin_site.html" %}
+{% load filters %}
+{% block title %}文章管理{% endblock %}
+{% block sub_menu %}{% include "admin/article_sub_menu.html" %}{% endblock %}
+{% block content %}
+<script type="text/javascript" src="/scripts/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="/scripts/ajaxupload.js"></script>
+<script type="text/javascript" src="/scripts/jquery.caretInsert.js"></script>
+<script type="text/javascript">
+function initImgUpload() {
+        var button = $('#upload'), interval;
+        new AjaxUpload(button, {
+            action: 'pic_upload',
+            name: 'pic',
+            responseType: 'json',
+            onSubmit: function (file, ext) {
+                // change button text, when user selects file
+                button.text('uploading');
+
+                // If you want to allow uploading only 1 file at time,
+                // you can disable upload button
+                //this.disable();
+
+                // Uploding -> Uploading. -> Uploading...
+
+                interval = window.setInterval(function () {
+                    var text = button.text();
+                    if (text.length < 12) {
+                        button.text(text + '.');
+                    } else {
+                        button.text('uploading');
+                    }
+                }, 200);
+            },
+            onComplete: function (file, response) {
+                button.text('upload');
+                window.clearInterval(interval);
+                $('#spic').val(response.spic)
+                $('#mpic').val(response.mpic)
+                $('#bpic').val(response.bpic)
+                $('#pic_shower').attr('src','/up/' + response.spic)
+            }
+        });
+    }
+
+
+var lang = new Array();
+var userAgent = navigator.userAgent.toLowerCase();
+var is_opera = userAgent.indexOf('opera') != -1 && opera.version();
+var is_moz = (navigator.product == 'Gecko') && userAgent.substr(userAgent.indexOf('firefox') + 8, 3);
+var is_ie = (userAgent.indexOf('msie') != -1 && !is_opera) && userAgent.substr(userAgent.indexOf('msie') + 5, 3);
+
+//高亮选择文本框的内容
+function highlight(x){
+document.getElementById(x).elements[0].select();
+}
+
+//在光标处插入指定的内容
+function InsertContent(obj,content)
+{
+   var o = $('#' + obj);
+    o.setCaret();
+    o.insertAtCaret(content);
+}
+
+
+function InsertTag(obj,tag)
+{
+  var o = $('#' + obj);
+    o.setCaret();
+    o.insertAtCaret('[' + tag + '][/' + tag + ']');
+}
+
+function UBB(tag)
+{
+    obj = 'description';
+    InsertTag(obj,tag);
+}
+
+function UBB2(control,tag)
+{
+	InsertTag(control,tag);
+}
+
+function InsertSentence(sentence)
+{
+var obj = 'description';
+InsertContent(obj,sentence);
+}
+
+function BoxIncrease(objId)
+{
+    var obj = $('#'+objId);
+    var height = obj.height();
+    obj.height(obj.height()+100);
+}
+
+function BoxDecrease(objId)
+{
+   var obj = $('#'+objId);
+    var height = obj.height();
+    if (height>100){
+        obj.height(obj.height()-100);
+    }
+}
+
+function FillCompatibility()
+{
+    var result = "";
+    if (document.getElementById("chkie6").checked) result += "IE6,";
+    if (document.getElementById("chkie7").checked) result += "IE7,";
+    if (document.getElementById("chkie8").checked) result += "IE8,";
+    if (document.getElementById("chkie9").checked) result += "IE9,";
+    if (document.getElementById("chkff").checked) result += "FireFox,";
+    if (document.getElementById("chkopr").checked) result += "Opera,";
+    if (document.getElementById('chkchrome').checked) result += "Chrome,";
+    if (document.getElementById('chksafari').checked) result += "Safari,";
+    document.getElementById("compatibility").value = result.substr(0,result.length-1);
+}
+
+//填充内容概要
+function FillDescription()
+{
+    var result = "";
+    $('[name="chk_description"]').each(function(){
+        if (this.checked)
+            result += $(this).attr('title') + ',';
+    });
+    result = result.substr(0,result.length-1);
+    $('#short_description').val(result);
+}
+
+function CheckAll()
+{
+    $('[name="chkbrowse"]').attr('checked',$('#chkall').attr('checked')) ;
+    FillCompatibility();
+}
+
+function demo_url_change()
+{
+    var demo_url = $('#demo_url').val();
+    var last_index = demo_url.lastIndexOf('/');
+    if (last_index>0)
+    {
+        var dir = demo_url.substr(0,last_index);
+        var filename = dir.substr(dir.lastIndexOf('/'),dir.length)
+        var full_download_url = dir + filename + ".zip";
+        var pic = dir+"/demo.jpg";
+        var small_pic = dir+"/small_demo.jpg"
+        $('#full_download_url').val(full_download_url);
+        $('#pic').val(pic);
+        $('#small_pic').val(small_pic);
+    }
+}
+
+    function fill_category(){
+        var root_category_id = $('#root_category').val();
+        $.ajax({
+                url: 'get_child_category_list/' + root_category_id,
+                data: '',
+                type: 'post',
+                dataType: "json",
+                timeout: 30000, 
+                error: function () {
+                    alert('操作失败');
+                },
+                success: function (data) {
+                    $("#category1 option[value!='0']").remove();
+                    $("#category2 option[value!='0']").remove();
+                    $("#category3 option[value!='0']").remove();
+                    for (var category in data){
+                       $("#category1").append("<option value='" + data[category].category_id + "'>" + data[category].category_name + "</option>");
+                       $("#category2").append("<option value='" + data[category].category_id + "'>" + data[category].category_name + "</option>");
+                       $("#category3").append("<option value='" + data[category].category_id + "'>" + data[category].category_name + "</option>");
+                    }
+
+
+
+                    var category1 = 0;
+                    var category2 = 0;
+                    var category3 = 0;
+
+                    {%if article%}
+                    category1 = {{article.category_id}};
+                    category2 = {{article.category_id2}};
+                    category3 = {{article.category_id3}};
+                    {%endif%}
+
+                    $('#category1').val(category1);
+                    $('#category2').val(category2);
+                    $('#category3').val(category3);
+                }
+            });
+
+    }
+
+
+    //初始化
+    $(document).ready(function () {
+        var root_category_id = 0;
+        {%if article%}
+        root_category_id={{article.root_category_id}};
+        {%endif%}
+        $('#root_category').val(root_category_id);
+        fill_category();
+        //initImgUpload();
+        $('[name="chk_description"]').click(FillDescription);
+    });
+</script>
+<form  method="post">
+<p class="message">{{ message }}</p>
+<input type="hidden" name="id"  value="{{article.id}}" />
+<input type="hidden" name="refer_url" value="{{ refer_url }}" />
+<table>
+<tr><td><div align="right"> 类别：</div></td>
+    <td>
+    <select name="root_category" id="root_category" onchange="fill_category()">
+    <option  value="0">选择类别</option>
+    {%for category in root_category_list%}
+	<option  value="{{category.category_id}}">{{category.category_name}}</option>
+    {%endfor%}
+    </select>
+
+    <select name="category1" id="category1">
+    <option  value="0">选择类别</option>
+    {%for category in category_list_1%}
+	<option  value="{{category.category_id}}">{{category.category_name}}</option>
+    {%endfor%}
+    </select>
+
+    <select name="category2" id="category2">
+    <option  value="0">选择类别</option>
+    {%for category in category_list_2%}
+	<option  value="{{category.category_id}}">{{category.category_name}}</option>
+    {%endfor%}
+    </select>
+
+    <select name="category3" id="category3">
+    <option  value="0">选择类别</option>
+    {%for category in category_list_3%}
+	<option  value="{{category.category_id}}">{{category.category_name}}</option>
+    {%endfor%}
+    </select>
+    </td>
+    </tr>
+    <tr>
+        <td><div align="right"> 标题：</div></td>
+        <td><input name="title" class="text_box" type="text" id="title" value="{{article.title}}"  />
+            {% if article.demo_url %}
+            <a href="{{ article.demo_url }}" target="_blank">预览</a>
+            {% endif %}
+
+            {% if  article.pic %}
+            <a href="{{ article.pic }}" target="_blank">演示图</a>
+            {% endif %}
+        </td>
+    </tr>
+
+    <tr>
+        <td><div align="right">简介：</div></td>
+        <td>
+            <textarea name="short_description"  class="text_box" id="short_description">{{article.short_description}}</textarea>
+            <br />
+            <input type="checkbox"  title="两栏式" name="chk_description" />两栏式
+            <input type="checkbox"  title="三栏式" name="chk_description" />三栏式
+            <br />
+            <input type="checkbox"  title="固定宽度" name="chk_description" />固定宽度
+            <input type="checkbox"  title="宽度自适应" name="chk_description" />宽度自适应
+            <br />
+            <input type="checkbox"  title="居中对齐" name="chk_description" />居中对齐
+            <input type="checkbox"  title="靠左对齐" name="chk_description" />靠左对齐
+            <br />
+            <input type="checkbox"  title="包含图片、样式表" name="chk_description" />包含图片、样式表
+            <input type="checkbox"  title="包含PSD分层原型图" name="chk_description" />包含PSD分层原型图
+            <br />
+            <input type="checkbox"  title="设计分辨率:1024x768" name="chk_description" />设计分辨率:1024x768
+            <input type="checkbox"  title="设计分辨率:800x600" name="chk_description" />设计分辨率:800x600
+            <br />
+            <input type="checkbox"  title="适合制作个人网站、博客" name="chk_description" />适合制作个人网站、博客
+            <input type="checkbox"  title="适合制作中小企业网站" name="chk_description" />适合制作中小企业网站
+
+        </td>
+    </tr>
+
+
+    <tr>
+        <td><div align="right"> 作者：</div></td>
+        <td>
+              <input name="author" class="text_box" type="text" id="author" value="{{article.author}}" />
+              <input type="button" value=" URL " onClick="UBB2('author','url')" />
+              <input type="button" value=" Email " onClick="UBB2('author','email')" />
+        </td>
+    </tr>
+
+    <tr>
+        <td><div align="right"> 出处：</div></td>
+        <td>
+          <input name="source" class="text_box" type="text" id="source" value="{{article.source}}"  />
+          <input type="button" value=" URL " onClick="UBB2('source','url')" />
+          <input type="button" value=" Email " onClick="UBB2('source','email')" />
+        </td>
+    </tr>
+      <tr><td align="right">代码兼容性：</td>
+      <td><input name="compatibility" type="text" class="text_box" id="compatibility" value="{{article.compatibility}}" />
+          <input type="checkbox" onClick="FillCompatibility()" id="chkie6" name="chkbrowse" />IE6
+          <input type="checkbox" onClick="FillCompatibility()" id="chkie7" name="chkbrowse" />IE7
+          <input type="checkbox" onClick="FillCompatibility()" id="chkie8" name="chkbrowse" />IE8
+          <input type="checkbox" onClick="FillCompatibility()" id="chkie9" name="chkbrowse" />IE9
+          <input type="checkbox" onClick="FillCompatibility()" id="chkff" name="chkbrowse" />FireFox
+          <input type="checkbox" onClick="FillCompatibility()" id="chkopr" name="chkbrowse" />Opera
+          <input type="checkbox" onClick="FillCompatibility()" id="chkchrome" name="chkbrowse" />Chrome
+          <input type="checkbox" onClick="FillCompatibility()" id="chksafari" name="chkbrowse" />Safari
+          <input type="checkbox" onclick="CheckAll()" id="chkall" />全选
+          </td>
+    </tr>
+    <tr>
+        <td><div align="right">Tags:</div></td>
+        <td><input type="text" id="tags" name="tags" value="{{ article.tags }}" class="text_box" /></td>
+    </tr>
+    <tr>
+          <td><div align="right">演示代码(Body区)：</div></td>
+          <td><textarea name="demo_code" class="text_box" id="demo_code" >{{article.demo_code|safe}}</textarea></td>
+    </tr>
+    <tr>
+      <td><div align="right">演示代码(Head区)：</div></td>
+      <td><textarea name="head_code" class="text_box" id="head_code">{{article.head_code}}</textarea></td>
+    </tr>
+    <tr>
+      <td><div align="right">演示代码(Body标签)：</div></td>
+      <td><textarea name="body_code" class="text_box" id="body_code">{{article.body_code}}</textarea></td>
+    </tr>
+    <tr>
+      <td> <div align="right">演示地址：</div></td>
+      <td><input name="demo_url" type="text" class="text_box" id="demo_url" value="{{article.demo_url}}" onchange="demo_url_change()" /> </td>
+    </tr>
+    <tr>
+        <td> <div align="right">UBB标签：</div></td>
+        <td>
+        <input type="button" value="版权代码" onClick="UBB('copyright')" />
+        <input type="button" value="codebox" onClick="UBB('codebox')" />
+        <input type="button" value="code" onClick="UBB('code')" />
+        <input type="button" value="runcode" onClick="UBB('runcode')" />
+        <input type="button" value="runtimecode" onclick="UBB('runtimecode')" />
+        <input type="button" value=" B " onClick="UBB('b')" />
+        <input type="button" value=" URL " onClick="UBB('url')" />
+        <input type="button" value=" IMG " onClick="UBB('img')" />
+
+          <select ID="lstSentence" name="lstSentence" onchange="InsertSentence(this.value + '\r\n')">
+              <option  value="">请选择预定义语句</option>
+              <option  value="[b]下载[/b][url=]点击这里下载脚本源代码[/url]">[B]下载[/B][URL=]点击这里下载脚本源代码[/URL]</option>
+              <option  value="[b]在网页<head>区添加以下代码[/b]">[B]在网页<head>区添加以下代码[/B]</option>
+              <option  value="[b]在网页<body>区添加以下代码[/b]">[B]在网页<body>区添加以下代码[/B]</option>
+              <option  value="[b]修改网页<body>标签，添加OnLoad事件[/b]">修改网页<body>标签，添加OnLoad事件[/B]</option>
+          </select>
+        </td>
+    </tr>
+    <tr>
+      <td><div align="right">详细内容：</div></td>
+      <td><textarea name="description" class="area_box" id="description">{{ article.description|safe }}</textarea>
+      <input type="button" value="+" onClick="BoxIncrease('description')" />
+      <input type="button" value="-" onClick="BoxDecrease('description')" />
+      </td>
+    </tr>
+
+    <tr>
+        <td><div align="right"> 开发者代码：</div></td>
+        <td><textarea name="dev_view_code" class="text_box" id="dev_view_code">{{article.dev_view_code}}</textarea> 	</td>
+    </tr>
+
+    <tr>
+    <td><div align="right"> 完整代码下载地址：</div></td>
+    <td>
+       <input name="full_download_url" type="text" class="text_box" id="full_download_url" value="{{article.full_download_url}}" /></td>
+    </tr>
+
+    <tr>
+    <td><div align="right"> 主图：</div></td>
+    <td><input name="pic" type="text" id="pic" class="text_box" value="{{article.pic}}" /></td>
+    </tr>
+
+<tr>
+    <td><div align="right"> 小图片：</div></td>
+    <td><input name="small_pic" type="text" id="small_pic" class="text_box" value="{{article.small_pic}}" /></td>
+</tr>
+
+    <tr>
+        <td><div align="right"> 是否推荐：</div></td>
+        <td><input id="recommend" type="checkbox" name="recommend" {%if article.recommend%}checked{%endif%}  /><label for="recommend">推荐</label></td>
+    </tr>
+
+    <tr>
+        <td><div align="right"> 专题：</div></td>
+        <td>
+            <select name="topic_id" id="topic_id">
+            <option value="0">请选择专题</option>
+            {%for topic in topic_list%}
+            <option value="{{topic.topic_id}}" {%ifequal article.topic_id topic.topic_id%}selected{%endifequal%}>{{topic.title}}</option>
+            {%endfor%}
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td><label for="hits">点击量：</label></td>
+        <td><input type="text" name="hits" id="hits" value="{%  if article.hits %}{{ article.hits }}{% else %}0{% endif %}" /></td>
+    </tr>
+
+    <tr>
+        <td><label for="hits">isrtdate：</label></td>
+        <td><input type="text" name="isrtdate" id="isrtdate" value="{%  if article.isrtdate %}{{ article.isrtdate|format_date_time }}{% else %}{% now "Y-m-d H:i:s" %}{% endif %}" /></td>
+    </tr>
+
+    <tr>
+        <td><label for="hits">lasthitdate：</label></td>
+        <td><input type="text" name="last_hit_date" id="last_hit_date" value="{%  if article.last_hit_date %}{{ article.last_hit_date|format_date_time }}{% else %}{% now "Y-m-d H:i:s" %}{% endif %}" /></td>
+    </tr>
+
+    <tr>
+    <td></td>
+    <td><input type="submit"  value="填写完成，提交" /></td>
+    </tr>
+
+</table>
+
+</form>
+{% endblock %}

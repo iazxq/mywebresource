@@ -1,0 +1,36 @@
+/* CSS Document */
+
+#team-info li .overlay {
+	filter: alpha(opacity=60);
+}
+
+.port-overlay {
+	filter: alpha(opacity=80) !important;
+}
+
+#skills li span {
+	top: 18px;
+	left: 0;
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);	
+} 
+
+.post-date {
+	margin-left: 0;
+}
+
+.accordion li div span {
+	filter: alpha(opacity=80);
+	bottom: 7px;
+}
+
+.galleria-info-text {
+	filter: alpha(opacity=70);
+}
+
+.port-columns li.hidden > h2, .port-columns li.hidden > h3, .port-columns li.hidden > p {
+	filter: alpha(opacity=20);
+}
+
+#fancybox-title-over {
+	filter: alpha(opacity=60);
+}

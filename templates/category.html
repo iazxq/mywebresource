@@ -1,0 +1,79 @@
+{% extends "site.html" %}
+{%load filters%}
+{%load article_list_item_tag%}
+{%load search_form_tag%}
+{% block title %}{{ category.root_category.category_name }}{% endblock %}
+
+{% block main %}
+
+<!--第一列-->
+<div id=col1>
+<h1>
+<a href="/">首页</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.root_category.category_id}}">{{category.root_category.category_name}}</a>&nbsp;&gt;&nbsp;{{category.category_name}}
+</h1>
+<p class=dotted align=center>
+  {%search_form_tag%}
+
+  {%for article in article_list%}
+  {%article_list_item_tag article%}
+  {%endfor%}
+
+
+  <p align=center>
+    {%  include 'common/pager.html' %}
+  </p>
+  <ul><span class=clear></span></ul>
+</div>
+<!--第一列end-->
+
+<!--第二列-->
+<div id=col2>
+<h1><a title="{{category.category_name}}" href="#">{{category.category_name}}</a></h1>
+<p><b>{{category.category_name}}分类浏览</b></p>
+<ul>
+  {%for category in category_list%}
+  <li><a href="/category/{{category.category_id}}">{{category.category_name}}</a></li>
+  {%endfor%}
+</ul>
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-0652501482160045";
+/* 160x600, 创建于 08-12-8 */
+google_ad_slot = "0508711133";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<h1><a title="本类热门" href="#">本类热门</a></h1>
+<p><b>本类热门脚本</b></p>
+<ul>
+ {%for article in hot_article_list%}
+  <li><a title="{{article.title}}" href="/subject/{{article.id}}"  target=_blank>{{article.title}}</a></li>
+ {%endfor%}
+</ul>
+
+
+<span class=clear></span>
+</div>
+<!--第二列end-->
+
+<!--第三列-->
+<div id=col3>
+
+<h1><a title="专题" href="topic.aspx">专题推荐</a></h1>
+<a href="/topic/1"><img src="/images2/topic/1.jpg" border="0"></a>
+<ul>
+{%for topic in topic_list%}
+   <li><a href="/topic/{{topic.topic_id}}" target="_blank">{{topic.title}}</a> </li>
+{%endfor%}
+</ul>
+<span class=clear></span>
+</div>
+<!--第三列结束-->
+
+
+{% endblock %}

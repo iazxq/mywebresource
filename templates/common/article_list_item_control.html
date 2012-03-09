@@ -1,0 +1,10 @@
+{%load filters%}
+<p class=dotted><img class=noborder   src="/images2/jt.gif" align=absMiddle>
+  <a title="{{article.title}}"  href="/subject/{{article.id}}"  target=_blank><strong>{{article.title}}</strong></a> / 分类：<a  href="/category/{{article.category.category_id}}">{{article.category.category_name}}</a> / {{article.isrtdate|format_date}}<br>
+  {%if article.pic%}
+  <a title="{{article.title}}" href="/subject/{{article.id}}"  target=_blank><img alt="{{article.title}}" src="{{article.pic}}"  width="429"></a><br>
+  {%endif%}
+  {{article.short_description}}<br>
+  <b>您可以： </b><a title="新窗口打开下载" href="/subject/{{article.id}}"  target=_blank><img class=noborder src="/images2/xqk.gif"  align="absMiddle" border="0"> 新窗口打开下载</a>
+  <a title="推荐给朋友"  href="/subject/{{article.id}}/recommend"  target=_blank><img class=noborder src="/images2/fx.gif"  align="absMiddle" border="0"> 推荐给朋友</a> </p>
+  

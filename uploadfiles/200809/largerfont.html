@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+</head>
+<body>
+<script language=JavaScript>
+<!-- Begin
+var speed = 20;
+var cycledelay = 1000;
+var maxsize = 48;
+
+var x = 0;
+var y = 0;
+var themessage, size;
+var esize = "";
+
+function initArray() {
+this.length = initArray.arguments.length;
+for (var i = 0; i < this.length; i++) {
+this[i] = initArray.arguments[i];
+   }
+}
+var themessage2 = new initArray(
+"欢迎分享JavaScript",
+"I Love JavaScript",
+"JavaScript is great",
+"信息四"
+); 
+if(navigator.appName == "Netscape")
+document.write('<layer id="wds"></layer><br>');
+if (navigator.appVersion.indexOf("MSIE") != -1)
+document.write('<span id="wds"></span><br>');
+function upwords(){
+themessage = themessage2[y];
+if (x < maxsize) {
+x++;
+setTimeout("upwords()",speed);
+}
+else setTimeout("downwords()",cycledelay);
+
+if(navigator.appName == "Netscape") {
+size = "<font point-size='"+x+"pt'>";
+document.wds.document.write(size+"<center>"+themessage+"</center>"+esize);
+document.wds.document.close();
+}
+if (navigator.appVersion.indexOf("MSIE") != -1){
+wds.innerHTML = "<center>"+themessage+"</center>";
+wds.style.fontSize=x+'px'
+   }
+}
+function downwords(){
+if (x > 1) {
+x--;
+setTimeout("downwords()",speed);
+}
+else {
+setTimeout("upwords()",cycledelay);
+y++;
+if (y > themessage2.length - 1) y = 0;
+}
+if(navigator.appName == "Netscape") {
+size = "<font point-size='"+x+"pt'>";
+document.wds.document.write(size+"<center>"+themessage+"</center>"+esize);
+document.wds.document.close();
+}
+if (navigator.appVersion.indexOf("MSIE") != -1){
+wds.innerHTML = "<center>"+themessage+"</center>";
+wds.style.fontSize=x+'px'
+   }
+}
+setTimeout("upwords()",speed);
+//  End -->
+</script>
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "site.html" %}
+{%load filters%}
+{% block title %}{{article.title}} 推荐给朋友 {% endblock %}
+
+{% block main %}
+<div id=endpagecol1 style="width:950px">
+<h1><a href="/">首页</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.root_category.category_id}}">{{category.root_category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.category_id}}">{{category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="/subject/{{article.id}}">{{article.title}}</a>&nbsp;&gt;&nbsp;推荐给朋友</h1>
+<p class=dotted align=left>
+{%include "google/adsense_728_90.html"%}
+<br>
+标题：<a href="/subject/{{article.id}}">{{article.title}}</a>
+<br><br>
+复制地址给QQ/MSN上的好友：<br>
+<input type="text" id="txtUrl" value="http://www.sharejs.com/subject/{{article.id}}"  style="width:80%" /><br>
+
+</p>
+
+</div>
+
+
+{% endblock %}

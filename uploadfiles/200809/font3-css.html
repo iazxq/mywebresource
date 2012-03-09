@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+</head>
+<body>
+
+<span id=show style="font:menu">
+中文Abc<span>欢迎分享JavaScript ShareJS.com</span>中文Abc<br>
+中文Abc<span style="color:yellow" scroll="red">欢迎分享JavaScript ShareJS.com</span>中文Abc<br>
+中文Abc<span style="color:purple" scroll="blue">欢迎分享JavaScript ShareJS.com</span>中文Abc<br>
+中文Abc<span style="color:black" scroll="lime">欢迎分享JavaScript ShareJS.com</span>中文Abc<br>
+中文Abc<span style="color:silver" scroll="green">欢迎分享JavaScript ShareJS.com</span>中文Abc<br>
+中文Abc<span>欢迎分享JavaScript ShareJS.com</span>中文Abc<br>
+</span>
+<script>
+var tags=show.all.tags("span");
+for(i=0;i<tags.length;i++){
+if(!tags[i].scroll)continue;
+eval("var c"+i+"=0")
+setInterval("var str=tags["+i+"].innerText;if(c"+i+"==str.length)c"+i+"=0;tags["+i+"].innerHTML=str.substring(0,c"+i+")+'<font color="+tags[i].scroll+">'+str.substr(c"+i+"++,1)+'</font>'+str.substr(c"+i+")",300)
+}
+</script>
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

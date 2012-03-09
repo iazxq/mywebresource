@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{%block title%}{%endblock%} Javascript分享网</title>
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="keywords" content="{% block keywords %}{% endblock %}" />
+    <link rel="shortcut icon" href="／favicon.ico" />
+    <!-- Start CSS -->
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="all" />
+    <link href="/css/light.css" type="text/css" rel="stylesheet" media="all" />
+    <!--[if lte IE 8]>
+		   <link href="/css/ie8.css" type="text/css" rel="stylesheet" media="all" />
+		<![endif]-->
+    <!--[if IE 9]>
+		   <link href="/css/ie9.css" type="text/css" rel="stylesheet" media="all" />
+		<![endif]-->
+    <!-- End CSS -->
+    <!-- Start Javascript -->
+    <script src="/js/jquery-1.6.3.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.tweet.js" type="text/javascript"></script>
+    <script src="/js/jquery.easing.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.carouFredSel-4.3.3-packed.js" type="text/javascript"></script>
+    <script src="/js/inkd.js" type="text/javascript"></script>
+    {%block head%}{%endblock%}
+    <!-- End Javascript -->
+</head>
+<body>
+<div id="wrapper">
+<!-- Start Header -->
+<div id="header">
+    <ul id="header-social">
+        <li>
+            <div id="search">
+                <form action="{% url search %}">
+                    <fieldset>
+                        <input id="search-btn" type="submit" value="" />
+                        <input id="search-field" name="wd" type="text" value="" />
+                    </fieldset>
+                </form>
+            </div>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+    <a id="logo" href="/">sharejs.com</a>
+
+    <!-- Start Main Navigation -->
+    <ul id="main-nav">
+        <li>
+            <a href="{% url js %}">JS脚本</a>
+            <ul>
+                <li><a href="{% url code %}">JS代码</a></li>
+                <li><a href="{% url tutorial %}">JS教程</a></li>
+                <li><a href="{% url software %}">JS软件及资源</a></li>
+                <li><a href="{% url tools %}">JS在线小工具</a></li>
+                <li><a href="{% url jquery %}">jQuery及插件</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{% url png %}">图标资源</a>
+        </li>
+        <li>
+            <a href="{% url vector %}">矢量素材</a>
+        </li>
+        <li><a href="{% url template %}">网页模板</a></li>
+        <li><a href="{% url software %}">软件.资源</a></li>
+    </ul>
+    <!-- End Main Navigation -->
+
+    <div class="clearfix"></div>
+</div>
+<!-- End Header -->
+<div id="head-nav">
+    {% block head-nav %}{% endblock %}
+</div>
+
+<!-- Start Content -->
+{% block port-carousel %}{% endblock %}
+{% block main-content %}{% endblock %}
+<!-- End Content -->
+
+<!-- Start Sidebar -->
+{% block sidebar %}{% endblock %}
+<!-- End Sidebar -->
+
+
+<!-- Start Footer -->
+<div class="clearfix"></div>
+<div id="footer">
+    <div id="bottom-footer">
+        <p>&copy;Copyright, 2004-2012 sharejs.com. Powered by  <a href="http://www.sharejs.com">sharejs.com</a></p>
+
+            <p>本站所有资源仅用于学习，不可用于商业用途，如有疑问请发Email至：<img src="/images/email.jpg" width="150" height="20" />
+
+            <script language="javascript" type="text/javascript" src="http://js.users.51.la/2222838.js"></script>
+        <noscript><a href="http://www.51.la/?2222838" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/2222838.asp" style="border:none" /></a></noscript>
+
+        </p>
+
+    </div>
+</div>
+<!-- End Footer -->
+
+</div>
+<!-- End Wrapper -->
+
+</body>
+</html>

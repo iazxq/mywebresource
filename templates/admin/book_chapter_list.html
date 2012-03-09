@@ -1,0 +1,27 @@
+{% extends "admin/admin_site.html" %}
+{% load filters %}
+{% block title %}图书章节管理{% endblock %}
+{% block sub_menu %}{% include "admin/book_chapter_sub_menu.html" %}{% endblock %}
+{% block content %}
+<script language="javascript">
+function del(id,title){
+    if (confirm("确定删除《" + title +"》?"))
+        location.href="book_chapter_del?id=" + id;
+}
+</script>
+<table>
+    <tr class="head">
+        <td width="100">编号</td>
+        <td>章节名称</td>
+        <td width="50"></td>
+    </tr>
+    {% for book_chapter in book_chapter_list %}
+    <tr class="{% cycle row1,row2 %}">
+        <td>{{ book_chapter.id }}</td>
+        <td>{{ book_chapter.title }}</td>
+        <td><a href="book_chapter_edit?book_id={{ book_chapter.book_id }}&id={{ book_chapter.id }}">改</a> | <a href="javascript:void(0)" onclick="del('{{ book_chapter.id }}','{{ book_chapter.title }}')">删</a></td>
+    </tr>
+    {%endfor  %}
+</table>
+    {% include "common/pager.html" %}
+{% endblock %}

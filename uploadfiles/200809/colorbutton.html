@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+<style>
+<!--
+/*修改为你想要的颜色*/
+
+.initial2{font-weight:bold;background-color:lime}
+//-->
+</style>
+
+<script>
+<!--
+
+function change(color){
+var el=event.srcElement
+if (el.tagName=="INPUT"&&el.type=="button")
+event.srcElement.style.backgroundColor=color
+}
+
+function jumpto2(url){
+window.location=url
+}
+
+//-->
+</script>
+</head>
+<body>
+
+<form onMouseover="change('yellow')" onMouseout="change('lime')">
+<input type="button" value="ShareJS.com " class="initial2" onClick="jumpto2('http://www.sharejs.com')">
+<input type="button" value="Google " class="initial2" onClick="jumpto2('http://Google.com')">
+<input type="button" value="PDBooks " class="initial2"  onClick="jumpto2('http://www.pdbooks.net')">
+</form>
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

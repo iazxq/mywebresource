@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>常见形状面积换算器 - 分享JavaScript-sharejs.com</title>
+</head>
+<body>
+
+<script language="JavaScript">
+function Circle(form)
+{form.circleanswer.value = form.circleradius.value * form.circleradius.value * 3.14159265}
+function Rec(form)
+{form.recanswer.value = form.reclength.value * form.recheight.value}
+function Sphere(form)
+{form.sphereanswer.value = form.sphereradius.value * form.sphereradius.value * 3.14159265 * 4}
+function Square(form)
+{form.squareanswer.value = form.squarelength.value * form.squarelength.value}
+function Tri(form)
+{form.trianswer.value = form.tribase.value * form.triheight.value / 2}
+</script>
+<form>
+<h1>圆</h1>
+请输入半径<input type="text" name="circleradius"><br>
+<input type="button" value="换算面积" onClick="Circle(this.form)"><br>
+<input type="text" name="circleanswer">面积<br>
+<h1>矩形</h1>
+请输入长<input type="text" name="reclength"><br>
+请输入宽<input type="text" name="recheight"><br>
+<input type="button" value="换算面积" onClick="Rec(this.form)"><br>
+<input type="text" name="recanswer">面积<br>
+<h1>球</h1>
+请输入半径<input type="text" name="sphereradius"><br>
+<input type="button" value="换算面积" onClick="Sphere(this.form)"><br>
+<input type="text" name="sphereanswer">面积<br>
+<h1>正方形</h1>
+请输入边长<input type="text" name="squarelength"><br>
+<input type="button" value="换算面积" onClick="Square(this.form)"><br>
+<input type="text" name="squareanswer">面积<br>
+<h1>三角形</h1>
+请输入底边长<input type="text" name="tribase"><br>
+请输入高<input type="text" name="triheight"><br>
+<input type="button" value="换算面积" onClick="Tri(this.form)"><br>
+<input type="text" name="trianswer">面积
+</form>
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

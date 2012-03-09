@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+<script language="JavaScript">
+
+
+var currTimerlinePoint = 0;
+var totalTimerlineFrames = 2;
+var timerlineTimer;
+var leftLine = 50;
+var timerIn;
+var timerOut;
+
+
+var timerlineArray = new Array();
+timerlineArray[0]='';
+timerlineArray[1]='menuItemOut()';
+
+
+
+function runTimerline()
+{
+//if (totalTimerlineFrames > currTimerlinePoint)
+//  {
+//  eval( timerlineArray[currTimerlinePoint]);
+//  currTimerlinePoint ++;
+//  }
+//else {currTimerlinePoint = 0; clearTimeout(window.timerlineTimer); return false;}
+
+//window.timerlineTimer = setTimeout('runTimerline()',1000);
+
+window.timerlineTimer = setTimeout('menuItemOut()',500);
+
+}
+
+function stopTimerline()
+{
+clearTimeout(window.timerlineTimer);
+//currTimerlinePoint = 0;
+}
+ 
+
+
+function menuItemIn()
+{
+    if( leftLine != 150)
+     {
+	 item11.style.pixelLeft += 20; item11.filters.alpha.opacity += 20; 
+     item12.style.pixelLeft -= 20; item12.filters.alpha.opacity += 20; 
+     item13.style.pixelLeft += 20; item13.filters.alpha.opacity += 20; 
+     item14.style.pixelLeft -= 20; item14.filters.alpha.opacity += 20;
+     item15.style.pixelLeft += 20; item15.filters.alpha.opacity += 20;
+     item16.style.pixelLeft -= 20; item16.filters.alpha.opacity += 20;
+     item17.style.pixelLeft += 20; item17.filters.alpha.opacity += 20;
+     item18.style.pixelLeft -= 20; item18.filters.alpha.opacity += 20;
+     item19.style.pixelLeft += 20; item19.filters.alpha.opacity += 20;
+     item20.style.pixelLeft -= 20; item20.filters.alpha.opacity += 20;
+     leftLine += 20;
+	 }
+  else 
+     {
+	 clearTimeout(window.timerIn);
+     return false;
+	 }
+  timerIn=window.setTimeout('menuItemIn()',1);
+}
+
+function menuItemOut()
+{ 
+   clearTimeout(window.timerIn);
+  if (leftLine != 50)
+     {
+      item11.style.pixelLeft -= 20; item11.filters.alpha.opacity -= 20;
+      item12.style.pixelLeft += 20; item12.filters.alpha.opacity -= 20;
+      item13.style.pixelLeft -= 20; item13.filters.alpha.opacity -= 20;
+      item14.style.pixelLeft += 20; item14.filters.alpha.opacity -= 20;
+      item15.style.pixelLeft -= 20; item15.filters.alpha.opacity -= 20;
+      item16.style.pixelLeft += 20; item16.filters.alpha.opacity -= 20;
+      item17.style.pixelLeft -= 20; item17.filters.alpha.opacity -= 20;
+      item18.style.pixelLeft += 20; item18.filters.alpha.opacity -= 20;
+      item19.style.pixelLeft -= 20; item19.filters.alpha.opacity -= 20;
+      item20.style.pixelLeft += 20; item20.filters.alpha.opacity -= 20;
+      leftLine -= 20;
+	  }
+   else 
+     {
+	 clearTimeout(window.timerOut);
+     return false;
+     }
+  timerOut=window.setTimeout("menuItemOut()",1);
+}
+</script>
+</head>
+<body>
+
+<div style="position:absolute; left:0px; top:-30px"><div align=center id="menu01" style="position:absolute; left:150px; top:33px; width:100px; height:19px; z-index:1; background-color: #000099; layer-background-color: #000099; border: 1px none #000000;padding-top:3;cursor:hand;font-size:9pt" onmouseover='stopTimerline();menuItemIn()' onmouseout='runTimerline()'><font color=white>主菜单</div> 
+<div align=center id="item11" style="position:absolute; left:50px; top:55px; width:99px; height:19px; z-index:2; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:4;cursor:hand;font-size:9pt" 
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项一</div>
+<div align=center id="item12" style="position:absolute; left:250px; top:77px; width:99px; height:19px; z-index:3; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项二</div>
+<div align=center id="item13" style="position:absolute; left:50px; top:99px; width:99px; height:19px; z-index:4; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项三</div>
+<div align=center id="item14" style="position:absolute; left:250px; top:121px; width:99px; height:19px; z-index:5; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项四</div>
+<div align=center id="item15" style="position:absolute; left:50px; top:143px; width:99px; height:19px; z-index:6; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项五</div>
+<div align=center id="item16" style="position:absolute; left:250px; top:165px; width:99px; height:19px; z-index:6; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项六</div>
+<div align=center id="item17" style="position:absolute; left:50px; top:187px; width:99px; height:19px; z-index:6; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项七</div>
+<div align=center id="item18" style="position:absolute; left:250px; top:209px; width:99px; height:19px; z-index:6; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项八</div>
+<div align=center id="item19" style="position:absolute; left:50px; top:231px; width:99px; height:19px; z-index:6; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项九</div>
+<div align=center id="item20" style="position:absolute; left:250px; top:253px; width:99px; height:19px; z-index:6; background-color: #0099CC; layer-background-color: #0099CC; border: 1px none #000000; filter:alpha(opacity=0);padding-top:3;cursor:hand;font-size:9pt"
+onmouseover="this.style.backgroundColor= '#006699';stopTimerline()" 
+onmouseout="this.style.backgroundColor= '#0099cc';runTimerline()">菜单项十</div></div>
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

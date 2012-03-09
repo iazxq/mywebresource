@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>旋转的文字 - 分享JavaScript-sharejs.com</title>
+</head>
+<body>
+ <script language=JavaScript>
+//author unknown
+Phrase="欢迎分享JavaScript"
+Balises=""
+Taille=80;
+Midx=300;
+Decal=0.5;
+Nb=Phrase.length;
+y=-10000;
+for (x=0;x<Nb;x++){
+  Balises=Balises + '<DIV Id=L' + x + ' STYLE="width:5;font-family: Courier New;font-weight:bold;position:absolute;top:300;left:300;z-index:1110">' + Phrase.charAt(x) + '</DIV>'
+}
+document.write (Balises);
+Time=window.setInterval("Alors()",10);
+Alpha=5;
+I_Alpha=0.05;
+
+function Alors(){
+	Alpha=Alpha-I_Alpha;
+	for (x=0;x<Nb;x++){
+		Alpha1=Alpha+Decal*x;
+		Cosine=Math.cos(Alpha1);
+		Ob=document.all("L"+x);
+		Ob.style.posLeft=Midx+170*Math.sin(Alpha1)+50;
+		Ob.style.zIndex=20*Cosine;
+		Ob.style.fontSize=Taille+25*Cosine;
+		Ob.style.color="rgb("+ (127+Cosine*80+50) + ","+ (127+Cosine*80+50) + ",0)";
+	}
+}
+
+</script>
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<h1><a title="专题" href="/topic/">专题推荐</a></h1>
+<a href="/topic/1"><img src="/images2/topic/1.jpg" border="0"></a>
+<ul>
+{%for topic in topic_list%}
+   <li><a href="/topic/{{topic.topic_id}}">{{topic.title}}</a> </li>
+{%endfor%}
+</ul>

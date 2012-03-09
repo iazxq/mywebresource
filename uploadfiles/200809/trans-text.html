@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+
+</head>
+<body>
+<script> 
+<!-- Beginning of JavaScript - 
+
+var thissize=30
+var textfont="Verdana"
+
+var textcolor= new Array()
+textcolor[0]="EEEEEE"
+textcolor[1]="DDDDDD"
+textcolor[2]="CCCCCC"
+textcolor[3]="AAAAAA"
+textcolor[4]="888888"
+textcolor[5]="666666"
+textcolor[6]="555555"
+textcolor[7]="444444"
+textcolor[8]="333333"
+textcolor[9]="222222"
+textcolor[10]="111111"
+textcolor[11]="000000"
+
+var message = new Array()
+message[0]="欢迎分享JavaScript"
+message[1]="http://www.sharejs.com"
+message[2]="读书破万卷"
+message[3]="http://www.pdbooks.net"
+
+var i_blurstrength=20
+var i_message=0
+var i_textcolor=0
+
+function blurtext() { 
+if(document.all) {
+if (i_blurstrength >=-2) {
+if (i_textcolor >=textcolor.length-1) {i_textcolor=textcolor.length-1}
+blurthis.innerHTML="<span id='blurpit1' style='position:absolute;visibility:visible;width:600px; top:5px;left:5px;filter:blur(add=0,strength="+i_blurstrength+",direction=90);font-family:"+textfont+";font-size:"+thissize+"pt;color:"+textcolor[i_textcolor]+"'>"+message[i_message]+"</span>";
+document.close()
+i_blurstrength=i_blurstrength-2
+i_textcolor++
+var timer=setTimeout("blurtext()",50)
+}
+
+else {
+if (i_textcolor >=textcolor.length-1) {i_textcolor=textcolor.length-1}
+blurthis.innerHTML="<span id='blurit1' style='position:absolute;visibility:visible;width:600px; top:5px;left:5px;filter:blendTrans(duration=4.2);font-family:"+textfont+";font-size:"+thissize+"pt;color:FF0000'>"+message[i_message]+"</span>";
+i_message++
+if (i_message>=message.length){i_message=0}
+
+i_blurstrength=20
+i_textcolor=0
+clearTimeout(timer)
+var timer=setTimeout("blurtext()",2000)
+}
+} 
+}
+window.onload=blurtext
+// - End of JavaScript - -->
+</script>
+<div id=mainbod 
+style="LEFT: 10px; VISIBILITY: visible; POSITION: absolute; TOP: 180px"></div>
+<div id=blurthis 
+style="VISIBILITY: visible; POSITION: absolute"></div>
+
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

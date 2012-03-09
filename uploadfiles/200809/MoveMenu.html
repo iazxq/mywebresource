@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+<style type="text/css">
+.menubar{position:absolute;top:10px;width:100px;height:20px;cursor:default;border-width:1px;border-style:outset;color:yellow;background:#0099cc}
+.menu{position:absolute;top:30px;width:140px;display:none;border-width:2px;border-style:outset;border-color:white sliver sliver white;background:yellow;padding:15px}
+.menu A{text-decoration:none;color:blue}
+.menu A:hover{color:#00ffff}
+</style>
+<script language="javascript">
+function menuControl(show)
+{
+window.event.cancelBubble=true;
+var objID=event.srcElement.id;
+var index=objID.indexOf("_");
+var mainID=objID.substring(0,index);
+var numID=objID.substring(index+1,objID.length);
+if(mainID=="menubar")
+{
+if(show==1)
+{
+eval("showMenu("+"menu_"+numID+")");
+}
+else
+{
+eval("hideMenu("+"menu_"+numID+")");
+}
+}
+
+}
+
+var nbottom=0,speed=1;
+function displayMenu(obj)
+{
+obj.style.clip="rect(0 100% "+nbottom+"% 0)";
+nbottom+=speed;
+if(nbottom<=100) 
+{
+timerID=setTimeout("displayMenu("+obj.id+"),70");
+}
+else clearTimeout(timerID);
+}
+function showMenu(obj)
+{
+obj.style.display="block";
+obj.style.clip="rect(0 0 0 0)";
+nbottom=5;
+displayMenu(obj);
+}
+function hideMenu(obj)
+{
+nbottom=0;
+obj.style.display="none";
+}
+function keepMenu(obj)
+{
+obj.style.display="block";
+}
+</script>
+<body>
+<table border="0" width="400" cellspacing="0" cellpadding="0" style="font-size:15px">
+<tr>
+<td width="20%">
+<div align="center"id="menubar_1" class="menubar" onmouseover="menuControl(1)" onmouseout="menuControl(0)">
+技术网站
+</div>
+</td>
+<td width="20%">
+<div align="center"id="menubar_2" class="menubar" onmouseover="menuControl(1)" onmouseout="menuControl(0)">
+搜索引擎
+</div>
+</td>
+<td width="20%">
+<div align="center"id="menubar_3" class="menubar" onmouseover="menuControl(1)" onmouseout="menuControl(0)">
+读书网站
+</div>
+</td>
+<td width="20%">
+<div align="center"id="menubar_4" class="menubar" onmouseover="menuControl(1)" onmouseout="menuControl(0)">
+门户网站
+</div>
+</td>
+</tr>
+<tr>
+<td width="20%">
+<div align="left"id="menu_1" class="menu" onmouseover="keepMenu(this)" onmouseout="hideMenu(this)">
+<a href="http://www.sharejs.com">分享JavaScript</a><br>
+<a href="http://www.csdn.net">CSDN</a><br>
+<a href="http://www.zol.com.cn">中关村在线</a>
+</div>
+</td>
+<td width="20%">
+<div align="left"id="menu_2" class="menu" onmouseover="keepMenu(this)" onmouseout="hideMenu(this)">
+<a href="http://www.google.com">Google</a><br>
+<a href="http://www.yahoo.com">Yahoo</a><br>
+<a href="http://www.youdao.com">有道搜索</a>
+</div>
+</td>
+<td width="20%">
+<div align="left"id="menu_3" class="menu" onmouseover="keepMenu(this)" onmouseout="hideMenu(this)">
+<a href="http://www.pdbooks.net">公共领域图书</a><br>
+<a href="http://www.52ebook.com">我爱E书</a><br>
+<a href="http://www.readnovel">小说阅读网</a><br>
+<a href="http://www.chinese.com">炎皇在线</a>
+</div>
+</td>
+<td width="20%">
+<div align="left"id="menu_4" class="menu" onmouseover="keepMenu(this)" onmouseout="hideMenu(this)">
+<a href="http://www.sohu.com.cn">搜狐</a><br>
+<a href="http://www.yahoo.com">雅虎</a><br>
+<a href="http://www.cseek.com">搜索客</a><br>
+<a href="http://www.sina.com">新浪网</a><br>
+<a href="httP;//www.cqcas.edu.cn/user/sailing">远航网站</a>
+</div>
+</td>
+</tr>
+</table>
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

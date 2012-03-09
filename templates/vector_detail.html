@@ -1,0 +1,92 @@
+{% extends "site.html" %}
+{%load filters%}
+{% block title %}{{article.title}}{% endblock %}
+{% block keywords %}{{ article.title }},{{ category.root_category.category_name }},{{ category.category_name }}{% endblock %}
+{% block description %}{{article.short_description}}{% endblock %}
+{% block main %}
+<div id=endpagecol1>
+<h1><a href="/">首页</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.root_category.category_id}}">{{category.root_category.category_name}}</a>&nbsp;&gt;&nbsp;<a href="/category/{{category.category_id}}">{{category.category_name}}</a>&nbsp;&gt;&nbsp;详细内容</h1>
+<p class=dotted align=center><span class="f14">{{article.title}}</span><br>
+    {%if article.compatibility%}兼容性：{{article.compatibility}}{%endif%}  &nbsp; 更新时间：{{article.isrtdate|format_date}}</p>
+<p class=dotted align=left>简介：{{article.short_description}}</p>
+
+
+ <p class=dotted align=left>
+ {%include "google/adsense_468_60.html"%}
+ <br /></p>
+
+    <br />
+    <span class="t1">预览：</span><br><br>
+    {% if article.description %}
+    {{article.description|ubb_to_html|safe}}
+    {% else %}
+    <img src="{{article.pic}}" alt="{{article.title}}" />
+    {% endif %}
+
+  <br>
+
+
+
+  <!--下载-->
+
+       <br> <span class="t1">打包下载此矢量图片包：</span>
+
+        <!--  JavaScript专用链代码 -->
+
+<script src="http://pstatic.xunlei.com/js/webThunderDetect.js"></script>
+<script src="http://pstatic.xunlei.com/js/base64.js"></script>
+<script language="javascript">
+    var thunder_url = "http://www.sharejs.com/download/{{ article.id }}";
+    var thunder_pid = "02184";
+    var restitle = "{{article.title}}";
+    document.write('<a href="#" thunderHref="' + ThunderEncode(thunder_url) + '" thunderPid="' + thunder_pid + '" thunderResTitle="' + restitle + '" onClick="return OnDownloadClick_Simple(this,2,4)" oncontextmenu="ThunderNetwork_SetHref(this)">迅雷专用高速下载[推荐]</a> ');
+</script>
+
+       &nbsp; &nbsp;
+        <a href="/download/{{ article.id }}" target="_blank">从本地下载</a>
+
+
+{%include "google/adsense_336_280.html"%}
+  <!--下载end-->
+
+
+
+
+<p class=dotted>上一篇：
+    {%if prev_article%}
+        <a href="/subject/{{prev_article.id}}">{{prev_article.title}}</a>
+    {%else%}
+        没有了
+    {%endif%} &nbsp;
+    下一篇:
+    {%if next_article%}
+        <a href="/subject/{{next_article.id}}">{{next_article.title}}</a>
+    {%else%}
+        没有了
+    {%endif%} </p>
+</div>
+
+
+
+<div id=col3>
+<h1><a title=本类最新资源 href="/category/{{category.category_id}}">本类最新资源</a></h1>
+<p>本类最新</p>
+<ul>
+{%for new_article in new_article_list %}
+<li><a href="/subject/{{new_article.id}}">{{new_article.title}}</a></li>
+{%endfor%}
+</ul>
+
+<h1><a title=本类热门资源 href="/category/{{category.category_id}}">本类热门资源</a></h1>
+<p>本类热门</p>
+<ul>
+{%for hot_article in hot_article_list %}
+<li><a href="/subject/{{hot_article.id}}">{{hot_article.title}}</a></li>
+{%endfor%}
+</ul>
+
+<br><br>
+
+</div>
+
+{% endblock %}

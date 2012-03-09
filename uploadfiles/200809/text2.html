@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>分享JavaScript-sharejs.com</title>
+</head>
+<body onload="startmotor(0)">
+
+<script language="JavaScript1.2">
+
+var size = 25;
+var speed_between_messages=1500  //in miliseconds
+
+
+var tekst = new Array()
+{
+tekst[0] = "波动交替的文字效果 ShareJS.com";
+tekst[1] = "你可以输入你要的文字";
+tekst[2] = "可以随意改变文字大小";
+tekst[3] = "可以随意改变切换速度";
+tekst[4] = "总之一个字：非常好";
+}
+var klaar = 0;
+var s = 0;
+var veran =0;
+var tel = 0;
+function bereken(i,Lengte)
+{
+return (size*Math.abs( Math.sin(i/(Lengte/3.14))) );
+}
+
+function motor(p)
+{
+var output = "";
+for(w = 0;w < tekst[s].length - klaar+1; w++)
+{
+q = bereken(w/2 + p,16);
+if (q > size - 0.5)
+{klaar++;}
+if (q < 5)
+{tel++;
+if (tel > 1)
+{
+tel = 0;
+if (veran == 1)
+{
+veran = 0;
+s++;
+if ( s == tekst.length)
+{s = 0;}
+p = 0;
+if (window.loop)
+{clearInterval(loop)}
+loop = motor();
+}
+}
+}
+output += "<font style='font-size: "+ q +"pt'>" +tekst[s].substring(w,w+1)+ "</font>";	
+}
+for(k=w;k<klaar+w;k++)
+{ 
+output += "<font style='font-size: " + size + "pt'>" +tekst[s].substring(k,k+1)+ "</font>";
+}
+idee.innerHTML = output;	
+}
+
+function startmotor(p){
+if (!document.all)
+return
+var loop = motor(p); 
+if (window.time)
+{clearInterval(time)}
+if (klaar == tekst[s].length)
+{
+klaar = 0;
+veran = 1;
+tel = 0;
+var time = setTimeout("startmotor(" +(p+1) + ")", speed_between_messages);
+}else
+{	
+var time =setTimeout("startmotor(" +(p+1) + ")", 50);
+}
+
+}
+
+</script>
+
+<div ID="idee"></div>
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</body>
+</html>

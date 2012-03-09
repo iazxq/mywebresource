@@ -1,0 +1,85 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>连接提示框显示 Ⅱ</TITLE>
+<!-- #EndEditable --> 
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+
+</HEAD>
+<BODY >
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TR bgColor=#ffffff> 
+    <TD><IMG src="../../images/space.gif" width=11 height="1"></TD>
+    <TD width="100%"> 
+      <table width="100%" border="0" cellpadding="8">
+       
+        <tr> 
+          <td bgcolor="#f7f7f7">
+            <style type="text/css">
+<!--
+BODY {OVERFLOW:scroll;OVERFLOW-X:hidden}
+.DEK {POSITION:absolute;VISIBILITY:hidden;Z-INDEX:200;}
+//-->
+</style>
+            提示:试试把鼠标放到连接上看看<br>
+            <div id="dek" class="dek"></div>
+            <script type="text/javascript">
+<!--
+
+/*
+Pop up information box II (Mike McGrath (mike_mcgrath@lineone.net,  http://website.lineone.net/~mike_mcgrath))
+Permission granted to Dynamicdrive.com to include script in archive
+For this and 100's more DHTML scripts, visit http://dynamicdrive.com
+*/
+
+Xoffset=-60;    // modify these values to ...
+Yoffset= 20;    // change the popup position.
+
+var nav,old,iex=(document.all),yyy=-1000;
+if(navigator.appName=="Netscape"){(document.layers)?nav=true:old=true;}
+
+if(!old){
+var skn=(nav)?document.dek:dek.style;
+if(nav)document.captureEvents(Event.MOUSEMOVE);
+document.onmousemove=get_mouse;
+}
+
+function popup(msg,bak){
+var content="<TABLE  WIDTH=150 BORDER=1 BORDERCOLOR=black CELLPADDING=2 CELLSPACING=0 "+
+"BGCOLOR="+bak+"><TD ALIGN=center><FONT COLOR=black SIZE=2>"+msg+"</FONT></TD></TABLE>";
+if(old){alert(msg);return;} 
+else{yyy=Yoffset;
+ if(nav){skn.document.write(content);skn.document.close();skn.visibility="visible"}
+ if(iex){document.all("dek").innerHTML=content;skn.visibility="visible"}
+ }
+}
+
+function get_mouse(e){
+var x=(nav)?e.pageX:event.x+document.body.scrollLeft;skn.left=x+Xoffset;
+var y=(nav)?e.pageY:event.y+document.body.scrollTop;skn.top=y+yyy;
+}
+
+function kill(){
+if(!old){yyy=-1000;skn.visibility="hidden";}
+}
+
+//-->
+</script>
+            <a href="http://www.sharejs.com" onMouseOver="popup('分享JavaScript是一件很有意思的事情...','yellow')"; onMouseOut="kill()">分享JS</a> 
+            <br>
+            <a href="http://www.sharejs.com" onMouseOver="popup('哈哈，没有什么可以说的，还是说了','lightgreen')"; onMouseOut="kill()">公共领域图书</a><br>
+            <a href="http://www.sharejs.com" onMouseOver="popup('没有什么是不可以的，什么都可以那还了得','lightyellow')"; onMouseOut="kill()">欢迎你</a> 
+            <br>
+            <!-- #EndEditable --></td>
+        </tr>
+        
+</TABLE>
+
+
+<br><br>
+<div align="center">
+获取更多JavaScript代码，请登录JavaScript分享网 <a href="http://www.sharejs.com">http://www.sharejs.com</a>
+</div>
+</BODY>
+</HTML>

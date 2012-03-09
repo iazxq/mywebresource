@@ -1,0 +1,105 @@
+{% extends "site.html" %}
+{%load filters%}
+{%load search_form_tag%}
+{%load article_list_item_tag%}
+{%load topic_list_tag%}
+{% block title %}{% endblock %}
+{% block keywords %}js,javascript,脚本,jQuery,网页特效,模板,网页设计模板,网站模板,css,HTML5,jQuery插件,网页动画,矢量图,图标下载,模板下载{% endblock %}
+{% block description %}分享集市 sharejs.com是一个以网站设计相关的资源分享网站，网站只提供最优秀的JS代码，jQuery插件,网页特效,HTML5代码，矢量图,设计图标，网站模板等，而且这一切都是免费的。{% endblock %}
+{% block main %}
+
+<div id=col1>
+<h1>
+最近更新推荐  [<a href="/code">最新更新列表</a>]
+</h1>
+
+<p class=dotted align=center>
+{%search_form_tag%}
+</p>
+
+<a href="/code">列出最新的18个资源，查看更多资源请点击这里...</a>
+<ul>
+
+  {%for article in article_list%}
+  {%article_list_item_tag article%}
+  {%endfor%}
+
+  <p align=center><b><a title="查看最新更新列表"  href="/code">查看最新更新列表（可翻页查看，每天更新的内容一目了然）</a></b><br> </p>
+  <ul><span class=clear></span></ul></ul></div>
+<div id=col2>
+
+<h1><a title=JavaScript脚本分类 href="#">JavaScript脚本分类</a></h1>
+<p><b>JavaScript脚本分类</b></p>
+<ul>
+  {%for category in js_category_list%}
+  <li><a href="/category/{{category.category_id}}">{{category.category_name}}</a></li>
+  {%endfor%}
+</ul>
+<span class=clear></span>
+
+<h1><a title="sharejs推荐" href="#">ShareJS推荐</a></h1>
+<p><b>ShareJS推荐</b></p>
+<ul>
+  {%for article in recommend_article_list%}
+    <li><a title="{{article.title}}" href="/subject/{{article.id}}"  target=_blank>{{article.title}}</a></li>
+  {%endfor%}
+ </ul><span class=clear></span>
+
+<h1><a title=最受网友关注的脚本程序 href="#">最受网友关注的脚本程序</a></h1>
+<p><b>网友点击最多的50个脚本</b></p>
+<ul>
+  {%for article in top_hits_article_list%}
+    <li><a title="{{article.title}}" href="/subject/{{article.id}}"  target=_blank>{{article.title}}</a></li>
+  {%endfor%}
+</ul>
+<span class=clear></span>
+
+<h1>最近被网友关注的脚本程序</h1>
+<p><b>网友最近查看过的30个脚本程序</b></p>
+<ul>
+  {%for article in last_hit_article_list%}
+    <li><a title="{{article.title}}" href="/subject/{{article.id}}"  target=_blank>{{article.title}}</a></li>
+  {%endfor%}
+</ul><span class=clear></span>
+
+<h1><a title='最新更新的脚本程序"' href="#">最新更新的脚本程序</a></h1>
+<p><b>最新更新的50个脚本程序</b></p>
+<ul>
+ {%for article in last_article_list%}
+    <li><a title="{{article.title}}" href="/subject/{{article.id}}"  target=_blank>{{article.title}}</a></li>
+  {%endfor%}</ul><span class=clear></span>
+
+<p></p></div>
+<div id=col3>
+
+<!--专题-->
+{%topic_list_tag%}
+<span class=clear></span>
+<!--专题end-->
+
+<!--推荐网站-->
+<h1><a title="推荐网站" href="#">推荐网站</a></h1>
+<p><b>推荐JavaScript网站</b></p>
+<ul>
+   <li><a href="http://www.dynamicdrive.com" target="_blank">Dynamic Drive</a> </li>
+  <li><a href="http://www.sharejs.com" target="_blank">JavaScript分享网</a> </li>
+ </ul>
+ <span class=clear></span>
+<!--推荐网站end-->
+
+
+<!--友情链接-->
+<h1><a title="友情链接" href="#">友情链接</a></h1>
+<p>
+<a href="http://www.cssplay.co.uk/" target="_blank">CSSPlay</a>
+<a href="http://www.dhtmlgoodies.com" target="_blank">dhtmlgoodies</a>
+<a href="http://www.185flowers.com" target="_blank">185鲜花礼品网</a>
+<a href="http://www.52ebook.com" target="_blank">我爱E书</a>
+</p>
+<span class=clear></span>
+<!--友情链接end-->
+</div>
+<span class=clear></span>
+
+
+{% endblock %}

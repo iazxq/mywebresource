@@ -1,0 +1,85 @@
+{% extends "default/site.html" %}
+{% load filters%}
+{% load recommend_article_pic_list_tag %}
+{% load last_article_list_tag %}
+{%load pager_tag%}
+
+{% block title %}搜索 {{ keyword }}{% endblock %}
+{% block keywords %}{{ keyword }},搜索{% endblock %}
+{% block description %}搜索{{ keyword }}{% endblock %}
+{% block head-nav %}当前位置 > <a href="{% url index %}"> 首页</a> > 搜索 {{ keyword }}{% endblock %}
+{% block main-content %}
+    <div id="main-content">
+
+
+        <div id="paginate-filter">
+            <ul id="port-filter">
+                <li class="port-active"><a href="{% url search 'pic' %}">图片显示</a></li>
+                <li><a href="{% url search 'text'%}">列表显示</a></li>
+            </ul>
+        </div>
+
+        <ul class="port-columns">
+            {% for article in article_list %}
+            <li class="three-col {% cycle '' 'end-col' %}">
+                <div class="port-bg">
+                    <div class="port-overlay"></div>
+                        {% if article %}
+                            {% if article.pic %}
+                            <a href="{% url detail article.id %}">
+                                <img alt="{{ article.title }}" src="{{ article.pic }}" class="big-img"/>
+                                <span>{{ article.title }}</span>
+                            </a>
+                            {% else %}
+                                <a href="{% url detail article.id %}">
+                                    <div class="big-img big-img-default"><span class="fz14">{{ article.title }}</span></div>
+                                </a>
+                            {% endif %}
+
+                        {% else %}
+                            {% include 'google/adsense_200_200.html' %}
+                        {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        {%pager_tag pager%}
+
+
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <div id="sidebar">
+        <div class="widget">
+            <h3>{{ category.category_name }}</h3>
+            <ul  class="bullet-list">
+                {% for child_category in category_list %}
+                    <li><a href="{% url category child_category.category_id %}">{{ child_category.category_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="widget">
+            <ul id="social-nav" class="sub-ruler">
+                <li><a href="#t1-sidebar">精品推荐</a></li>
+                <li><a href="#t2-sidebar">热门点击</a></li>
+            </ul>
+            <div id="t1-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in recommend_article_list %}
+                        <li><a href="{% url detail article.id %}">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="t2-sidebar" class="social-content">
+                <ul class="check-list">
+                    {% for article in hot_article_list %}
+                        <li><a href="{% url detail article.id %}">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

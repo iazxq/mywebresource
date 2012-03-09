@@ -1,0 +1,10 @@
+{% load filters%}
+<div class="three-col {{ end_col }}">
+    <h2>{{ title }}</h2>
+    <ul class="arrow-list">
+        {% for article in article_list %}
+            <li><span></span><a href="{% url detail article.id %}" target="_blank">{{ article.title|left_str:32 }}</a></li>
+        {% endfor %}
+        <a class="btn" href="{% url category category_id%}">获取更多{{ title }}<span></span></a>
+    </ul>
+</div>
